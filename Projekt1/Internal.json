@@ -1,0 +1,79 @@
+{
+  "MeshCube|2023-03-13T16:03:22.745Z|98545": {
+    "ƒ.MeshCube": {
+      "idResource": "MeshCube|2023-03-13T16:03:22.745Z|98545",
+      "name": "MeshCube",
+      "type": "MeshCube"
+    }
+  },
+  "Graph|2023-03-13T16:09:35.727Z|28302": {
+    "ƒ.Graph": {
+      "name": "Graph1",
+      "active": true,
+      "components": {
+        "ComponentMesh": [
+          {
+            "ƒ.ComponentMesh": {
+              "idMesh": "MeshCube|2023-03-13T16:03:22.745Z|98545",
+              "pivot": {
+                "translation": "[0, 0, 0]",
+                "rotation": "[0, 0, 0]",
+                "scaling": "[1, 1, 1]"
+              },
+              "Component": {
+                "active": true
+              }
+            }
+          }
+        ],
+        "ComponentMaterial": [
+          {
+            "ƒ.ComponentMaterial": {
+              "sortForAlpha": false,
+              "clrPrimary": "[1, 1, 1, 1]",
+              "clrSecondary": "[1, 1, 1, 1]",
+              "pivot": {
+                "translation": "[0, 0]",
+                "rotation": 0,
+                "scaling": "[1, 1]"
+              },
+              "Component": {
+                "active": true
+              },
+              "idMaterial": "Material|2023-03-13T16:23:37.383Z|69221"
+            }
+          }
+        ]
+      },
+      "children": [],
+      "idResource": "Graph|2023-03-13T16:09:35.727Z|28302",
+      "type": "Graph"
+    }
+  },
+  "Material|2023-03-13T16:13:34.540Z|87658": {
+    "ƒ.Material": {
+      "name": "ShaderFlat",
+      "idResource": "Material|2023-03-13T16:13:34.540Z|87658",
+      "shader": "ShaderFlat",
+      "coat": {
+        "ƒ.CoatRemissive": {
+          "color": "[0.7568627450980392, 0.34901960784313724, 0.8705882352941177, 1]",
+          "diffuse": 1,
+          "specular": 0
+        }
+      }
+    }
+  },
+  "Material|2023-03-13T16:23:37.383Z|69221": {
+    "ƒ.Material": {
+      "name": "ShaderLit",
+      "idResource": "Material|2023-03-13T16:23:37.383Z|69221",
+      "shader": "ShaderLit",
+      "coat": {
+        "ƒ.CoatColored": {
+          "color": "[0.0196078431372549, 0.803921568627451, 1, 1]"
+        }
+      }
+    }
+  }
+}

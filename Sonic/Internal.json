@@ -247,6 +247,30 @@
       }
     }
   },
+  "Material|2023-03-22T13:56:35.681Z|66206": {
+    "ƒ.Material": {
+      "name": "Sonic",
+      "idResource": "Material|2023-03-22T13:56:35.681Z|66206",
+      "shader": "ShaderLitTextured",
+      "coat": {
+        "ƒ.CoatTextured": {
+          "color": "[1, 1, 1, 1]",
+          "idTexture": "TextureImage|2023-03-22T13:56:47.374Z|43127"
+        }
+      }
+    }
+  },
+  "TextureImage|2023-03-22T13:56:47.374Z|43127": {
+    "ƒ.TextureImage": {
+      "url": "sonicc.png",
+      "type": "TextureImage",
+      "Texture": {
+        "idResource": "TextureImage|2023-03-22T13:56:47.374Z|43127",
+        "name": "sonicc.png",
+        "mipmap": "CRISP"
+      }
+    }
+  },
   "Graph|2023-03-20T15:45:19.369Z|09941": {
     "ƒ.Graph": {
       "name": "Game",
@@ -899,9 +923,9 @@
                         "ƒ.ComponentMesh": {
                           "idMesh": "MeshQuad|2023-03-20T15:46:46.582Z|74300",
                           "pivot": {
-                            "translation": "[9.249998092651367, -0.9630003571510315, 0]",
+                            "translation": "[9.239997863769531, -0.9630003571510315, 0]",
                             "rotation": "[0, 0, 0]",
-                            "scaling": "[0.5099999308586121, 0.45999985933303833, 1]"
+                            "scaling": "[0.5199999213218689, 0.45999985933303833, 1]"
                           },
                           "Component": {
                             "active": true
@@ -1510,30 +1534,6 @@
       ],
       "idResource": "Graph|2023-03-20T15:45:19.369Z|09941",
       "type": "Graph"
-    }
-  },
-  "Material|2023-03-22T13:56:35.681Z|66206": {
-    "ƒ.Material": {
-      "name": "Sonic",
-      "idResource": "Material|2023-03-22T13:56:35.681Z|66206",
-      "shader": "ShaderLitTextured",
-      "coat": {
-        "ƒ.CoatTextured": {
-          "color": "[1, 1, 1, 1]",
-          "idTexture": "TextureImage|2023-03-22T13:56:47.374Z|43127"
-        }
-      }
-    }
-  },
-  "TextureImage|2023-03-22T13:56:47.374Z|43127": {
-    "ƒ.TextureImage": {
-      "url": "sonicc.png",
-      "type": "TextureImage",
-      "Texture": {
-        "idResource": "TextureImage|2023-03-22T13:56:47.374Z|43127",
-        "name": "sonicc.png",
-        "mipmap": "CRISP"
-      }
     }
   }
 }

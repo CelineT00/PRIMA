@@ -256,6 +256,19 @@
       }
     }
   },
+  "Material|2023-03-23T12:55:58.224Z|74330": {
+    "ƒ.Material": {
+      "name": "Background",
+      "idResource": "Material|2023-03-23T12:55:58.224Z|74330",
+      "shader": "ShaderLitTextured",
+      "coat": {
+        "ƒ.CoatTextured": {
+          "color": "[1, 1, 1, 1]",
+          "idTexture": "TextureImage|2023-03-22T13:31:57.246Z|47831"
+        }
+      }
+    }
+  },
   "Graph|2023-03-20T15:45:19.369Z|09941": {
     "ƒ.Graph": {
       "name": "Game",
@@ -1034,7 +1047,7 @@
                         "ƒ.ComponentMesh": {
                           "idMesh": "MeshQuad|2023-03-20T15:46:46.582Z|74300",
                           "pivot": {
-                            "translation": "[4.0999979972839355, 0.3600004315376282, 0]",
+                            "translation": "[4.0999979972839355, 0.26000043749809265, 0]",
                             "rotation": "[0, 0, 0]",
                             "scaling": "[0.5999999046325684, 1, 1]"
                           },
@@ -1481,9 +1494,9 @@
                         "ƒ.ComponentMesh": {
                           "idMesh": "MeshQuad|2023-03-20T15:46:46.582Z|74300",
                           "pivot": {
-                            "translation": "[4.499999523162842, 3, 0]",
+                            "translation": "[4.499999523162842, 2.40000057220459, -1]",
                             "rotation": "[0, 0, 0]",
-                            "scaling": "[10, 7, 1]"
+                            "scaling": "[12, 8, 1]"
                           },
                           "Component": {
                             "active": true
@@ -1519,19 +1532,6 @@
       ],
       "idResource": "Graph|2023-03-20T15:45:19.369Z|09941",
       "type": "Graph"
-    }
-  },
-  "Material|2023-03-23T12:55:58.224Z|74330": {
-    "ƒ.Material": {
-      "name": "Background",
-      "idResource": "Material|2023-03-23T12:55:58.224Z|74330",
-      "shader": "ShaderLitTextured",
-      "coat": {
-        "ƒ.CoatTextured": {
-          "color": "[1, 1, 1, 1]",
-          "idTexture": "TextureImage|2023-03-22T13:31:57.246Z|47831"
-        }
-      }
     }
   }
 }

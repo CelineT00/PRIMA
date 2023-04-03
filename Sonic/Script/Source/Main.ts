@@ -3,8 +3,9 @@ namespace Script {
   ƒ.Debug.info("Main Program Template running!");
 
   let viewport: ƒ.Viewport;
+  let graph: ƒ.Node;
+  let character: ƒ.Node;
   let sonic: ƒ.Node;
-  let charactersonic: ƒ.Node;
   let gravity: number =-9.81;
   let ySpeed: number = 0;
   let isGrounded: boolean = true;
@@ -16,8 +17,8 @@ namespace Script {
   function start(_event: CustomEvent): void {
     viewport = _event.detail;
     
-    sonic = viewport.getBranch().getChildrenByName("Character")[0];
-    charactersonic = sonic.getChildren("Sonicc")[0];
+    character = viewport.getBranch().getChildrenByName("Character")[0];
+    sonic = character.getChildren("Sonicc")[0];
 
     let cmpCamera: ƒ.ComponentCamera = viewport.getBranch().getComponent(ƒ.ComponentCamera);
     viewport.camera = cmpCamera;
@@ -36,12 +37,12 @@ namespace Script {
   function movement():void {
     let timeFrame: number = ƒ.Loop.timeFrameGame/ 1000;
     if(ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])){
-      charactersonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
+      sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
     //if(_event.code == "ArrowRight" || _event.code == "KeyD"){
-      charactersonic.mtxLocal.translateX(2 * timeFrame);
+      sonic.mtxLocal.translateX(2 * timeFrame);
     } else if(ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])){
-      charactersonic.mtxLocal.rotation = ƒ.Vector3.Y(180);
-      charactersonic.mtxLocal.translateX(2 * timeFrame);
+      sonic.mtxLocal.rotation = ƒ.Vector3.Y(180);
+      sonic.mtxLocal.translateX(2 * timeFrame);
     }
     if(isGrounded = true && ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE])){
       ySpeed = 3;
@@ -50,18 +51,35 @@ namespace Script {
 
 
     ySpeed+=gravity* timeFrame;
-    let pos: ƒ.Vector3 = sonic.mtxLocal.translation;
+    let pos: ƒ.Vector3 = character.mtxLocal.translation;
     pos.y += ySpeed * timeFrame;
     if(pos.y < 0){
       ySpeed = 0;
       pos.y = 0;
     }
 
-    sonic.mtxLocal.translation  = pos;
+    character.mtxLocal.translation  = pos;
   }
 
 
   function hndKeyboard(_event: KeyboardEvent){
     console.log(_event);
+  }
+
+  function checkCollision(): void {
+    graph = viewport.getBranch();
+    let floors: ƒ.Node = graph.getChildrenByName("Terrain")[0];
+    let pos: ƒ.Vector3 = sonic.mtxLocal.translation;
+    for (let floor of floors.getChildren()) {
+      let posFloor: ƒ.Vector3 = floor.mtxLocal.translation;
+      if (Math.abs(pos.x - posFloor.x) < 0.5) {
+        if (pos.y < posFloor.y + 0.01) {
+          pos.y = posFloor.y + 0.01;
+          sonic.mtxLocal.translation = pos;
+          ySpeed = 0;
+
+        }
+      }
+    }
   }
 }

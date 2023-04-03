@@ -72,7 +72,7 @@ namespace Script {
     let pos: ƒ.Vector3 = sonic.mtxLocal.translation;
     for (let floor of floors.getChildren()) {
       let posFloor: ƒ.Vector3 = floor.mtxLocal.translation;
-      if (Math.abs(pos.x - posFloor.x) < 0.5) {
+      if (Math.abs(pos.x - posFloor.x) < 0.01) {
         if (pos.y < posFloor.y + 0.01) {
           pos.y = posFloor.y + 0.01;
           sonic.mtxLocal.translation = pos;

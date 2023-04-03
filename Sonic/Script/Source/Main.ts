@@ -35,10 +35,10 @@ namespace Script {
   }
 
   function movement():void {
+    let pos: ƒ.Vector3 = character.mtxLocal.translation;
     let timeFrame: number = ƒ.Loop.timeFrameGame/ 1000;
     if(ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])){
       sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
-    //if(_event.code == "ArrowRight" || _event.code == "KeyD"){
       sonic.mtxLocal.translateX(2 * timeFrame);
     } else if(ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])){
       sonic.mtxLocal.rotation = ƒ.Vector3.Y(180);
@@ -51,14 +51,21 @@ namespace Script {
 
 
     ySpeed+=gravity* timeFrame;
-    let pos: ƒ.Vector3 = character.mtxLocal.translation;
     pos.y += ySpeed * timeFrame;
     if(pos.y < 0){
       ySpeed = 0;
       pos.y = 0;
     }
 
+    let tileCollided: ƒ.Node = checkCollision(pos);
+    if(tileCollided){
+      ySpeed = 0;
+      pos.y =tileCollided.mtxWorld.translation.y + 0.5;
+      isGrounded= true;
+    }
+
     character.mtxLocal.translation  = pos;
+    
   }
 
 
@@ -66,7 +73,18 @@ namespace Script {
     console.log(_event);
   }
 
-  function checkCollision(): void {
+  function checkCollision(_posWorld: ƒ.Vector3): ƒ.Node{
+    let tiles: ƒ.Node[] = viewport.getBranch().getChildrenByName("Terrain")[0].getChildren();
+    for(let tile of tiles){
+      let pos: ƒ.Vector3 = ƒ.Vector3.TRANSFORMATION(_posWorld, tile.mtxWorldInverse, true);
+      if(pos.y < 0 && pos.x > -0.5 && pos.x < 0.5){
+        return tile;
+      }
+    }
+    return null;
+  }
+
+  /*function checkCollision(): void {
     graph = viewport.getBranch();
     let floors: ƒ.Node = graph.getChildrenByName("Terrain")[0];
     let pos: ƒ.Vector3 = sonic.mtxLocal.translation;
@@ -81,5 +99,5 @@ namespace Script {
         }
       }
     }
-  }
+  }*/
 }

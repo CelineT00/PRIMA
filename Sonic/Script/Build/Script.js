@@ -64,10 +64,10 @@ var Script;
         //ƒ.AudioManager.default.update();
     }
     function movement() {
+        let pos = character.mtxLocal.translation;
         let timeFrame = ƒ.Loop.timeFrameGame / 1000;
         if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
             sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
-            //if(_event.code == "ArrowRight" || _event.code == "KeyD"){
             sonic.mtxLocal.translateX(2 * timeFrame);
         }
         else if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])) {
@@ -79,31 +79,47 @@ var Script;
             isGrounded = false;
         }
         ySpeed += gravity * timeFrame;
-        let pos = character.mtxLocal.translation;
         pos.y += ySpeed * timeFrame;
         if (pos.y < 0) {
             ySpeed = 0;
             pos.y = 0;
+        }
+        let tileCollided = checkCollision(pos);
+        if (tileCollided) {
+            ySpeed = 0;
+            pos.y = tileCollided.mtxWorld.translation.y + 0.5;
+            isGrounded = true;
         }
         character.mtxLocal.translation = pos;
     }
     function hndKeyboard(_event) {
         console.log(_event);
     }
-    function checkCollision() {
-        graph = viewport.getBranch();
-        let floors = graph.getChildrenByName("Terrain")[0];
-        let pos = sonic.mtxLocal.translation;
-        for (let floor of floors.getChildren()) {
-            let posFloor = floor.mtxLocal.translation;
-            if (Math.abs(pos.x - posFloor.x) < 0.5) {
-                if (pos.y < posFloor.y + 0.01) {
-                    pos.y = posFloor.y + 0.01;
-                    sonic.mtxLocal.translation = pos;
-                    ySpeed = 0;
-                }
+    function checkCollision(_posWorld) {
+        let tiles = viewport.getBranch().getChildrenByName("Terrain")[0].getChildren();
+        for (let tile of tiles) {
+            let pos = ƒ.Vector3.TRANSFORMATION(_posWorld, tile.mtxWorldInverse, true);
+            if (pos.y < 0 && pos.x > -0.5 && pos.x < 0.5) {
+                return tile;
             }
         }
+        return null;
     }
+    /*function checkCollision(): void {
+      graph = viewport.getBranch();
+      let floors: ƒ.Node = graph.getChildrenByName("Terrain")[0];
+      let pos: ƒ.Vector3 = sonic.mtxLocal.translation;
+      for (let floor of floors.getChildren()) {
+        let posFloor: ƒ.Vector3 = floor.mtxLocal.translation;
+        if (Math.abs(pos.x - posFloor.x) < 0.01) {
+          if (pos.y < posFloor.y + 0.01) {
+            pos.y = posFloor.y + 0.01;
+            sonic.mtxLocal.translation = pos;
+            ySpeed = 0;
+  
+          }
+        }
+      }
+    }*/
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map

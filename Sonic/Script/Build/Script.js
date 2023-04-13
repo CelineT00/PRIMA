@@ -41,18 +41,17 @@ var Script;
     var ƒ = FudgeCore;
     ƒ.Debug.info("Main Program Template running!");
     let viewport;
-    let graph;
     let character;
     let sonic;
     let gravity = -9.81;
     let ySpeed = 0;
     let isGrounded = true;
     document.addEventListener("interactiveViewportStarted", start);
-    document.addEventListener("keydown", hndKeyboard);
+    // document.addEventListener("keydown",hndKeyboard);
     function start(_event) {
         viewport = _event.detail;
         character = viewport.getBranch().getChildrenByName("Character")[0];
-        sonic = character.getChildren("Sonicc")[0];
+        sonic = character.getChildrenByName("Sonicc")[0];
         let cmpCamera = viewport.getBranch().getComponent(ƒ.ComponentCamera);
         viewport.camera = cmpCamera;
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
@@ -61,11 +60,12 @@ var Script;
     function update(_event) {
         movement();
         viewport.draw();
+        changeAnimation("SonicRun");
         //ƒ.AudioManager.default.update();
     }
     function movement() {
-        let pos = character.mtxLocal.translation;
         let timeFrame = ƒ.Loop.timeFrameGame / 1000;
+        // ƒ.Physics.simulate();  // if physics is included and used
         if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
             sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
             sonic.mtxLocal.translateX(2 * timeFrame);
@@ -79,47 +79,30 @@ var Script;
             isGrounded = false;
         }
         ySpeed += gravity * timeFrame;
+        let pos = sonic.mtxLocal.translation;
         pos.y += ySpeed * timeFrame;
-        if (pos.y < 0) {
-            ySpeed = 0;
-            pos.y = 0;
-        }
         let tileCollided = checkCollision(pos);
         if (tileCollided) {
             ySpeed = 0;
-            pos.y = tileCollided.mtxWorld.translation.y + 0.5;
+            pos.y = tileCollided.mtxWorld.translation.y + 0.65;
             isGrounded = true;
         }
-        character.mtxLocal.translation = pos;
-    }
-    function hndKeyboard(_event) {
-        console.log(_event);
+        sonic.mtxLocal.translation = pos;
+        viewport.draw();
+        // ƒ.AudioManager.default.update();
     }
     function checkCollision(_posWorld) {
         let tiles = viewport.getBranch().getChildrenByName("Terrain")[0].getChildren();
         for (let tile of tiles) {
             let pos = ƒ.Vector3.TRANSFORMATION(_posWorld, tile.mtxWorldInverse, true);
-            if (pos.y < 0 && pos.x > -0.5 && pos.x < 0.5) {
+            if (pos.y < 0.65 && pos.x > -0.5 && pos.x < 0.5)
                 return tile;
-            }
         }
         return null;
     }
-    /*function checkCollision(): void {
-      graph = viewport.getBranch();
-      let floors: ƒ.Node = graph.getChildrenByName("Terrain")[0];
-      let pos: ƒ.Vector3 = sonic.mtxLocal.translation;
-      for (let floor of floors.getChildren()) {
-        let posFloor: ƒ.Vector3 = floor.mtxLocal.translation;
-        if (Math.abs(pos.x - posFloor.x) < 0.01) {
-          if (pos.y < posFloor.y + 0.01) {
-            pos.y = posFloor.y + 0.01;
-            sonic.mtxLocal.translation = pos;
-            ySpeed = 0;
-  
-          }
-        }
-      }
-    }*/
+    function changeAnimation(_animation) {
+        const newAnim = ƒ.Project.getResourcesByName(_animation)[0];
+        sonic.getComponent(ƒ.ComponentAnimator).animation = newAnim;
+    }
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map

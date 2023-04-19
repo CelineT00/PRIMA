@@ -58,9 +58,10 @@ var Script;
         ƒ.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
     }
     function update(_event) {
+        followCamera();
         movement();
         viewport.draw();
-        changeAnimation("SonicRun");
+        addAudio();
         //ƒ.AudioManager.default.update();
     }
     function movement() {
@@ -69,14 +70,22 @@ var Script;
         if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
             sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
             sonic.mtxLocal.translateX(2 * timeFrame);
+            changeAnimation("SonicRun");
+            addAudioSound("HYUNJIN_MEOW.mp3");
         }
         else if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])) {
             sonic.mtxLocal.rotation = ƒ.Vector3.Y(180);
             sonic.mtxLocal.translateX(2 * timeFrame);
+            changeAnimation("SonicRun");
+            addAudioSound("HYUNJIN_MEOW.mp3");
         }
-        if (isGrounded = true && ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE])) {
+        else {
+            changeAnimation("SonicIdle");
+        }
+        if (isGrounded == true && ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE])) {
             ySpeed = 3;
             isGrounded = false;
+            addAudioSound("Jump.mp3");
         }
         ySpeed += gravity * timeFrame;
         let pos = sonic.mtxLocal.translation;
@@ -103,6 +112,22 @@ var Script;
     function changeAnimation(_animation) {
         const newAnim = ƒ.Project.getResourcesByName(_animation)[0];
         sonic.getComponent(ƒ.ComponentAnimator).animation = newAnim;
+    }
+    function followCamera() {
+        let pos = sonic.mtxLocal.translation;
+        pos.z = viewport.camera.mtxPivot.translation.z;
+        viewport.camera.mtxPivot.translation = pos;
+    }
+    function addAudio() {
+        let audioListener = viewport.getBranch().getComponent(ƒ.ComponentAudioListener);
+        ƒ.AudioManager.default.listenWith(audioListener);
+        ƒ.AudioManager.default.listenTo(viewport.getBranch());
+    }
+    function addAudioSound(_audio) {
+        const newAudio = ƒ.Project.getResourcesByName(_audio)[0];
+        let audio = viewport.getBranch().getChildrenByName("Sounds")[0].getComponent(ƒ.ComponentAudio);
+        audio.setAudio(newAudio);
+        audio.play(true);
     }
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map

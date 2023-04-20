@@ -41,23 +41,24 @@ namespace Script {
     let timeFrame: number = ƒ.Loop.timeFrameGame/ 1000;
     // ƒ.Physics.simulate();  // if physics is included and used
     if(ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])){
+      addAudioSound("HYUNJIN_MEOW.mp3")
       sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
       sonic.mtxLocal.translateX(2 * timeFrame);
       changeAnimation("SonicRun");
-      addAudioSound("HYUNJIN_MEOW.mp3")
     } else if(ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])){
+      addAudioSound("HYUNJIN_MEOW.mp3")
       sonic.mtxLocal.rotation = ƒ.Vector3.Y(180);
       sonic.mtxLocal.translateX(2 * timeFrame);
       changeAnimation("SonicRun");
-      addAudioSound("HYUNJIN_MEOW.mp3")
     }
     else{
       changeAnimation("SonicIdle");
     }
     if(isGrounded == true && ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE])){
+      addAudioSound("Jump.mp3");
+
       ySpeed = 3;
       isGrounded = false;
-      addAudioSound("Jump.mp3");
     }
 
     ySpeed += gravity * timeFrame;

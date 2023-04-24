@@ -71,21 +71,19 @@ var Script;
             sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
             sonic.mtxLocal.translateX(2 * timeFrame);
             changeAnimation("SonicRun");
-            addAudioSound("HYUNJIN_MEOW.mp3");
         }
         else if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])) {
             sonic.mtxLocal.rotation = ƒ.Vector3.Y(180);
             sonic.mtxLocal.translateX(2 * timeFrame);
             changeAnimation("SonicRun");
-            addAudioSound("HYUNJIN_MEOW.mp3");
         }
         else {
             changeAnimation("SonicIdle");
         }
         if (isGrounded == true && ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE])) {
+            addAudioSound("Jump.mp3");
             ySpeed = 3;
             isGrounded = false;
-            addAudioSound("Jump.mp3");
         }
         ySpeed += gravity * timeFrame;
         let pos = sonic.mtxLocal.translation;
@@ -110,8 +108,16 @@ var Script;
         return null;
     }
     function changeAnimation(_animation) {
+        let currentAnim = sonic.getComponent(ƒ.ComponentAnimator).animation;
         const newAnim = ƒ.Project.getResourcesByName(_animation)[0];
-        sonic.getComponent(ƒ.ComponentAnimator).animation = newAnim;
+        if (currentAnim != newAnim) {
+            sonic.getComponent(ƒ.ComponentAnimator).animation = newAnim;
+            if (_animation == "SonicRun") {
+                addAudioSound("HYUNJIN_MEOW.mp3");
+            }
+            if (_animation == "SonicJump") {
+            }
+        }
     }
     function followCamera() {
         let pos = sonic.mtxLocal.translation;

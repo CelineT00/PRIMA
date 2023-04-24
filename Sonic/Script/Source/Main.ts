@@ -5,24 +5,24 @@ namespace Script {
   let viewport: ƒ.Viewport;
   let character: ƒ.Node;
   let sonic: ƒ.Node;
-  let gravity: number =-9.81;
+  let gravity: number = -9.81;
   let ySpeed: number = 0;
   let isGrounded: boolean = true;
   document.addEventListener("interactiveViewportStarted", <EventListener>start);
- // document.addEventListener("keydown",hndKeyboard);
+  // document.addEventListener("keydown",hndKeyboard);
 
-  
+
 
   function start(_event: CustomEvent): void {
     viewport = _event.detail;
-    
+
     character = viewport.getBranch().getChildrenByName("Character")[0];
     sonic = character.getChildrenByName("Sonicc")[0];
 
     let cmpCamera: ƒ.ComponentCamera = viewport.getBranch().getComponent(ƒ.ComponentCamera);
     viewport.camera = cmpCamera;
 
-    
+
 
 
     ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, update);
@@ -37,26 +37,23 @@ namespace Script {
     //ƒ.AudioManager.default.update();
   }
 
-  function movement():void {
-    let timeFrame: number = ƒ.Loop.timeFrameGame/ 1000;
+  function movement(): void {
+    let timeFrame: number = ƒ.Loop.timeFrameGame / 1000;
     // ƒ.Physics.simulate();  // if physics is included and used
-    if(ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])){
-      addAudioSound("HYUNJIN_MEOW.mp3")
+    if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
       sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
       sonic.mtxLocal.translateX(2 * timeFrame);
       changeAnimation("SonicRun");
-    } else if(ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])){
-      addAudioSound("HYUNJIN_MEOW.mp3")
+    } else if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_LEFT, ƒ.KEYBOARD_CODE.A])) {
       sonic.mtxLocal.rotation = ƒ.Vector3.Y(180);
       sonic.mtxLocal.translateX(2 * timeFrame);
       changeAnimation("SonicRun");
     }
-    else{
+    else {
       changeAnimation("SonicIdle");
     }
-    if(isGrounded == true && ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE])){
+    if (isGrounded == true && ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE])) {
       addAudioSound("Jump.mp3");
-
       ySpeed = 3;
       isGrounded = false;
     }
@@ -92,24 +89,33 @@ namespace Script {
   }
 
   function changeAnimation(_animation: string): void {
-    const newAnim = ƒ.Project.getResourcesByName(_animation)[0] as ƒ.AnimationSprite;
-    sonic.getComponent(ƒ.ComponentAnimator).animation = newAnim;
+    let currentAnim: ƒ.AnimationSprite = sonic.getComponent(ƒ.ComponentAnimator).animation as ƒ.AnimationSprite;
+    const newAnim: ƒ.AnimationSprite = ƒ.Project.getResourcesByName(_animation)[0] as ƒ.AnimationSprite;
+    if (currentAnim != newAnim) {
+      sonic.getComponent(ƒ.ComponentAnimator).animation = newAnim;
+      if(_animation == "SonicRun"){
+        addAudioSound("HYUNJIN_MEOW.mp3");
+      }
+      if (_animation == "SonicJump") {
+        
+      }
+    }
   }
-  
-  function followCamera(){
+
+  function followCamera() {
     let pos: ƒ.Vector3 = sonic.mtxLocal.translation;
     pos.z = viewport.camera.mtxPivot.translation.z;
     viewport.camera.mtxPivot.translation = pos;
   }
 
-  function addAudio(){
+  function addAudio() {
     let audioListener: ƒ.ComponentAudioListener = viewport.getBranch().getComponent(ƒ.ComponentAudioListener);
     ƒ.AudioManager.default.listenWith(audioListener);
     ƒ.AudioManager.default.listenTo(viewport.getBranch());
 
   }
 
-  function addAudioSound(_audio: string){
+  function addAudioSound(_audio: string) {
     const newAudio = ƒ.Project.getResourcesByName(_audio)[0] as ƒ.Audio;
     let audio = viewport.getBranch().getChildrenByName("Sounds")[0].getComponent(ƒ.ComponentAudio);
     audio.setAudio(newAudio);

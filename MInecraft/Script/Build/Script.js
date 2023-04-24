@@ -3,13 +3,15 @@ var Script;
 (function (Script) {
     var ƒ = FudgeCore;
     class Block extends ƒ.Node {
-        constructor() {
+        static mshCube = new ƒ.MeshCube("Block");
+        static mtlCube = new ƒ.Material("Block", ƒ.ShaderFlat, new ƒ.CoatRemissive());
+        constructor(_position, _color) {
             super("Block");
-            let mesCube = new ƒ.MeshCube("Block");
-            let mtlCube = new ƒ.Material();
-        }
-        createMesh() {
-            this.addComponent(this);
+            this.addComponent(new ƒ.ComponentMesh(Block.mshCube));
+            let cmpMaterial = new ƒ.ComponentMaterial(Block.mtlCube);
+            cmpMaterial.clrPrimary = _color;
+            this.addComponent(cmpMaterial);
+            this.addComponent(new ƒ.ComponentTransform(ƒ.Matrix4x4.TRANSLATION(_position)));
         }
     }
     Script.Block = Block;
@@ -60,11 +62,21 @@ var Script;
     document.addEventListener("interactiveViewportStarted", start);
     async function start(_event) {
         viewport = _event.detail;
-        let block = ƒ.Project.resources["Graph|2023-04-20T13:20:07.943Z|28797"];
-        let instance = await ƒ.Project.createGraphInstance(block);
-        console.log(instance);
-        instance.mtxLocal.translateX(1);
-        viewport.getBranch().addChild(instance);
+        //let block: ƒ.Graph = <ƒ.Graph>ƒ.Project.resources["Graph|2023-04-20T13:20:07.943Z|28797"];
+        //let instance: ƒ.GraphInstance = await ƒ.Project.createGraphInstance(block);
+        //console.log(instance);
+        //instance.mtxLocal.translateX(1);
+        //let instance: Block = new Block(ƒ.Vector3.X(1),ƒ.Color.CSS("red"));
+        //console.log(instance);
+        for (let xindex = 0; xindex < 3; xindex++) {
+            for (let yindex = 0; yindex < 3; yindex++) {
+                for (let zindex = 0; zindex < 3; zindex++) {
+                    let instance = new Script.Block(new ƒ.Vector3(xindex, yindex, zindex), ƒ.Color.CSS("purple"));
+                    console.log(instance);
+                    viewport.getBranch().addChild(instance);
+                }
+            }
+        }
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
         // ƒ.Loop.start();  // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
     }

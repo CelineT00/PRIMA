@@ -62,15 +62,7 @@
           }
         ]
       },
-      "children": [
-        {
-          "ƒ.GraphInstance": {
-            "deserializeFromSource": true,
-            "name": "Cube",
-            "idSource": "Graph|2023-04-20T13:20:07.943Z|28797"
-          }
-        }
-      ],
+      "children": [],
       "idResource": "Graph|2023-04-20T13:15:04.086Z|49512",
       "type": "Graph"
     }
@@ -118,7 +110,7 @@
           {
             "ƒ.ComponentTransform": {
               "local": {
-                "translation": "[0, 0, 0]",
+                "translation": "[1, 0, 0]",
                 "rotation": "[0, 0, 0]",
                 "scaling": "[1, 1, 1]"
               },

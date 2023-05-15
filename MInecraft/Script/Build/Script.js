@@ -4,14 +4,20 @@ var Script;
     var ƒ = FudgeCore;
     class Block extends ƒ.Node {
         static mshCube = new ƒ.MeshCube("Block");
-        static mtlCube = new ƒ.Material("Block", ƒ.ShaderFlat, new ƒ.CoatRemissive());
+        static mtrCube = new ƒ.Material("Block", ƒ.ShaderFlat, new ƒ.CoatRemissive());
         constructor(_position, _color) {
             super("Block");
             this.addComponent(new ƒ.ComponentMesh(Block.mshCube));
-            let cmpMaterial = new ƒ.ComponentMaterial(Block.mtlCube);
+            let cmpMaterial = new ƒ.ComponentMaterial(Block.mtrCube);
             cmpMaterial.clrPrimary = _color;
             this.addComponent(cmpMaterial);
             this.addComponent(new ƒ.ComponentTransform(ƒ.Matrix4x4.TRANSLATION(_position)));
+            let cmpPick = new ƒ.ComponentPick();
+            cmpPick.pick = ƒ.PICK.CAMERA;
+            this.addComponent(cmpPick);
+            let cmpRigidbody = new ƒ.ComponentRigidbody(1, ƒ.BODY_TYPE.STATIC, ƒ.COLLIDER_TYPE.CUBE);
+            this.addComponent(cmpRigidbody);
+            // cmpRigidbody.addEventListener(ƒ.EVENT_PHYSICS.COLLISION_ENTER, () => console.log("Collision"));
         }
     }
     Script.Block = Block;
@@ -57,33 +63,166 @@ var Script;
 (function (Script) {
     var ƒ = FudgeCore;
     ƒ.Debug.info("Main Program Template running!");
-    let viewport;
-    //@ts-ignore
+    Script.grid3D = [];
+    Script.gridAssoc = {};
+    let steve;
+    let cmpRigidbody;
     document.addEventListener("interactiveViewportStarted", start);
     async function start(_event) {
-        viewport = _event.detail;
-        //let block: ƒ.Graph = <ƒ.Graph>ƒ.Project.resources["Graph|2023-04-20T13:20:07.943Z|28797"];
-        //let instance: ƒ.GraphInstance = await ƒ.Project.createGraphInstance(block);
-        //console.log(instance);
-        //instance.mtxLocal.translateX(1);
-        //let instance: Block = new Block(ƒ.Vector3.X(1),ƒ.Color.CSS("red"));
-        //console.log(instance);
-        for (let xindex = 0; xindex < 3; xindex++) {
-            for (let yindex = 0; yindex < 3; yindex++) {
-                for (let zindex = 0; zindex < 3; zindex++) {
-                    let instance = new Script.Block(new ƒ.Vector3(xindex, yindex, zindex), ƒ.Color.CSS("purple"));
-                    console.log(instance);
-                    viewport.getBranch().addChild(instance);
+        Script.viewport = _event.detail;
+        Script.viewport.physicsDebugMode = ƒ.PHYSICS_DEBUGMODE.COLLIDERS;
+        Script.viewport.canvas.addEventListener("contextmenu", _event => _event.preventDefault());
+        generateWorld(10, 3, 9);
+        let pickAlgorithm = [Script.pickByComponent, Script.pickByCamera, Script.pickByRadius, Script.pickByGrid];
+        Script.viewport.canvas.addEventListener("pointerdown", pickAlgorithm[1]);
+        Script.viewport.getBranch().addEventListener("pointerdown", Script.hitComponent);
+        steve = Script.viewport.getBranch().getChildrenByName("Steve")[0];
+        console.log(steve);
+        Script.viewport.camera = steve.getComponent(ƒ.ComponentCamera);
+        cmpRigidbody = steve.getComponent(ƒ.ComponentRigidbody);
+        cmpRigidbody.effectRotation = ƒ.Vector3.Y();
+        // console.log(ƒ.Physics.settings.sleepingAngularVelocityThreshold);
+        ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
+        ƒ.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
+    }
+    function update(_event) {
+        control();
+        ƒ.Physics.simulate(); // if physics is included and used
+        Script.viewport.draw();
+        ƒ.AudioManager.default.update();
+    }
+    function control() {
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.A, ƒ.KEYBOARD_CODE.ARROW_LEFT]))
+            cmpRigidbody.applyTorque(ƒ.Vector3.Y(5));
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.D, ƒ.KEYBOARD_CODE.ARROW_RIGHT]))
+            cmpRigidbody.applyTorque(ƒ.Vector3.Y(-5));
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.W, ƒ.KEYBOARD_CODE.ARROW_UP]))
+            cmpRigidbody.applyForce(ƒ.Vector3.SCALE(steve.mtxWorld.getZ(), 1000));
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.S, ƒ.KEYBOARD_CODE.ARROW_DOWN]))
+            cmpRigidbody.applyForce(ƒ.Vector3.SCALE(steve.mtxWorld.getZ(), -1000));
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE]) && cmpRigidbody.getVelocity().y == 0)
+            cmpRigidbody.addVelocity(ƒ.Vector3.Y(4));
+    }
+    function generateWorld(_width, _height, _depth) {
+        Script.blocks = new ƒ.Node("Blocks");
+        Script.viewport.getBranch().addChild(Script.blocks);
+        // let vctOffset: ƒ.Vector2 = new ƒ.Vector2(Math.floor(_width / 2), Math.floor(_depth / 2));
+        let vctOffset = ƒ.Vector2.ZERO();
+        for (let y = 0; y < _height; y++) {
+            Script.grid3D[y] = [];
+            for (let z = 0; z < _depth; z++) {
+                Script.grid3D[y][z] = [];
+                for (let x = 0; x < _width; x++) {
+                    let vctPosition = new ƒ.Vector3(x - vctOffset.x, y + Math.random() * 0.2, z - vctOffset.y);
+                    let txtColor = ƒ.Random.default.getElement(["red", "lime", "blue", "yellow"]);
+                    createBlock(vctPosition, txtColor);
                 }
             }
         }
-        ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
-        // ƒ.Loop.start();  // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
+        console.log(Script.gridAssoc);
     }
-    function update(_event) {
-        // ƒ.Physics.simulate();  // if physics is included and used
-        viewport.draw();
-        ƒ.AudioManager.default.update();
+    function createBlock(_vctPosition, _txtColor) {
+        let block = new Script.Block(_vctPosition, ƒ.Color.CSS(_txtColor));
+        block.name = _vctPosition.toString() + "|" + _txtColor;
+        console.log(block.name);
+        Script.blocks.addChild(block);
+        Script.gridAssoc[_vctPosition.toString()] = block;
+        try {
+            Script.grid3D[_vctPosition.y][_vctPosition.z][_vctPosition.x] = block;
+        }
+        catch (_e) { }
+    }
+    Script.createBlock = createBlock;
+})(Script || (Script = {}));
+var Script;
+(function (Script) {
+    var ƒ = FudgeCore;
+    function pickByComponent(_event) {
+        console.log("pickByComponent");
+        Reflect.set(_event, "closestDistance", Infinity);
+        Reflect.set(_event, "closestBlock", null);
+        Script.viewport.dispatchPointerEvent(_event);
+        hitBlock(Reflect.get(_event, "closestBlock"));
+    }
+    Script.pickByComponent = pickByComponent;
+    function hitComponent(_event) {
+        let block = _event.target;
+        let closestDistance = Reflect.get(_event, "closestDistance");
+        let pick = Reflect.get(_event, "pick");
+        if (pick.zBuffer < closestDistance) {
+            Reflect.set(_event, "closestDistance", pick.zBuffer);
+            Reflect.set(_event, "closestBlock", block);
+        }
+    }
+    Script.hitComponent = hitComponent;
+    function pickByCamera(_event) {
+        console.log("pickCamera");
+        let picks = ƒ.Picker.pickViewport(Script.viewport, new ƒ.Vector2(_event.clientX, _event.clientY));
+        picks.sort((_a, _b) => _a.zBuffer < _b.zBuffer ? -1 : 1);
+        let pick = picks[0];
+        if (_event.button == 1)
+            hitBlock(pick.node);
+        else if (_event.button == 2) {
+            let posNewBlock = ƒ.Vector3.SUM(pick.node.mtxWorld.translation, pick.normal);
+            addBlock(posNewBlock);
+        }
+    }
+    Script.pickByCamera = pickByCamera;
+    function pickByRadius(_event) {
+        console.log("pickByRay");
+        let ray = Script.viewport.getRayFromClient(new ƒ.Vector2(_event.clientX, _event.clientY));
+        let shortest;
+        let found = null;
+        let compare = Math.pow(0.7, 2);
+        for (let block of Script.blocks.getChildren()) {
+            if (compare < ray.getDistance(block.mtxWorld.translation).magnitudeSquared)
+                continue;
+            let distance = ƒ.Vector3.DIFFERENCE(block.mtxWorld.translation, ray.origin).magnitudeSquared;
+            if (shortest == undefined || distance < shortest) {
+                shortest = distance;
+                found = block;
+            }
+        }
+        hitBlock(found);
+    }
+    Script.pickByRadius = pickByRadius;
+    function pickByGrid(_event) {
+        console.log("pickByGrid");
+        let ray = Script.viewport.getRayFromClient(new ƒ.Vector2(_event.clientX, _event.clientY));
+        let posCheck = ray.origin.clone;
+        let vctStep = ray.direction.clone;
+        // find largest component value
+        let largest = vctStep.get().reduce((_p, _c) => Math.max(_p, Math.abs(_c)));
+        // normalize to 1 in that direction
+        vctStep.scale(1 / largest);
+        for (let i = 0; i < 100; i++) {
+            posCheck.add(vctStep);
+            let posGrid = posCheck.map(_value => Math.round(_value));
+            console.log(posGrid.toString(), posCheck.toString());
+            try {
+                let block = Script.grid3D[posGrid.y][posGrid.z][posGrid.x];
+                // let block = gridAssoc[posGrid.toString()];
+                if (block) {
+                    hitBlock(block);
+                    return;
+                }
+            }
+            catch (_e) { }
+        }
+    }
+    Script.pickByGrid = pickByGrid;
+    function hitBlock(_block) {
+        if (!_block)
+            return;
+        console.log(_block.name);
+        _block.getParent().removeChild(_block);
+        Script.viewport.draw();
+    }
+    function addBlock(_pos) {
+        if (Script.gridAssoc[_pos.toString()]) // already a block there...
+            return;
+        Script.createBlock(_pos, "white");
+        Script.viewport.draw();
     }
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map

@@ -86,6 +86,7 @@ var Script;
         ƒ.Physics.simulate(); // if physics is included and used
         Script.viewport.draw();
         ƒ.AudioManager.default.update();
+        changeAnimation("idle");
     }
     function setupSteve() {
         // console.log(ƒ.Physics.settings.sleepingAngularVelocityThreshold);
@@ -98,17 +99,26 @@ var Script;
     }
     function controlSteve() {
         let cmpRigidbody = steve.getComponent(ƒ.ComponentRigidbody);
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.A, ƒ.KEYBOARD_CODE.ARROW_LEFT]))
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.A, ƒ.KEYBOARD_CODE.ARROW_LEFT])) {
             cmpRigidbody.applyTorque(ƒ.Vector3.Y(5));
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.D, ƒ.KEYBOARD_CODE.ARROW_RIGHT]))
+            changeAnimation("run");
+        }
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.D, ƒ.KEYBOARD_CODE.ARROW_RIGHT])) {
             cmpRigidbody.applyTorque(ƒ.Vector3.Y(-5));
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.W, ƒ.KEYBOARD_CODE.ARROW_UP]))
+            changeAnimation("run");
+        }
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.W, ƒ.KEYBOARD_CODE.ARROW_UP])) {
             cmpRigidbody.applyForce(ƒ.Vector3.SCALE(steve.mtxWorld.getZ(), 1000));
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.S, ƒ.KEYBOARD_CODE.ARROW_DOWN]))
+            changeAnimation("run");
+        }
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.S, ƒ.KEYBOARD_CODE.ARROW_DOWN])) {
             cmpRigidbody.applyForce(ƒ.Vector3.SCALE(steve.mtxWorld.getZ(), -1000));
+            changeAnimation("run");
+        }
         if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE]) && isGrounded) {
             cmpRigidbody.addVelocity(ƒ.Vector3.Y(5));
             isGrounded = false;
+            changeAnimation("jump");
         }
     }
     function steveCollides(_event) {
@@ -148,6 +158,15 @@ var Script;
         catch (_e) { }
     }
     Script.createBlock = createBlock;
+    function changeAnimation(_animation) {
+        steve = Script.viewport.getBranch().getChildrenByName("Steve")[0];
+        let geometry = steve.getChildrenByName("Geometry")[0];
+        let currentAnim = geometry.getComponent(ƒ.ComponentAnimator).animation;
+        const newAnim = ƒ.Project.getResourcesByName(_animation)[0];
+        if (currentAnim != newAnim) {
+            geometry.getComponent(ƒ.ComponentAnimator).animation = newAnim;
+        }
+    }
 })(Script || (Script = {}));
 var Script;
 (function (Script) {

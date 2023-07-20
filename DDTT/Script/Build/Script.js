@@ -152,12 +152,15 @@ var Script;
     Script.ySpeed = 0;
     Script.isGrounded = true;
     document.addEventListener("interactiveViewportStarted", start);
-    function start(_event) {
+    async function start(_event) {
+        let response = await fetch("config.json");
+        let config = await response.json();
         Script.viewport = _event.detail;
         Script.character = Script.viewport.getBranch().getChildrenByName("Character")[0];
         Script.ket = Script.character.getChildrenByName("Ket")[0];
         let cmpCamera = Script.viewport.getBranch().getComponent(ƒ.ComponentCamera);
         Script.viewport.camera = cmpCamera;
+        Script.vui = new Script.VisualUi(config);
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
         ƒ.Loop.start();
     }

@@ -1,15 +1,15 @@
 {
-  "MeshCube|2023-04-20T13:03:52.158Z|47053": {
+  "MeshCube|2023-04-20T13:15:06.454Z|19870": {
     "ƒ.MeshCube": {
-      "idResource": "MeshCube|2023-04-20T13:03:52.158Z|47053",
+      "idResource": "MeshCube|2023-04-20T13:15:06.454Z|19870",
       "name": "MeshCube",
       "type": "MeshCube"
     }
   },
-  "Material|2023-04-20T13:14:40.166Z|03167": {
+  "Material|2023-04-20T13:15:11.925Z|39362": {
     "ƒ.Material": {
       "name": "ShaderFlat",
-      "idResource": "Material|2023-04-20T13:14:40.166Z|03167",
+      "idResource": "Material|2023-04-20T13:15:11.925Z|39362",
       "shader": "ShaderFlat",
       "coat": {
         "ƒ.CoatRemissive": {
@@ -20,12 +20,73 @@
       }
     }
   },
-  "Animation|2023-05-23T05:55:06.542Z|45657": {
+  "Graph|2023-04-20T13:16:47.382Z|26427": {
+    "ƒ.Graph": {
+      "name": "Cube",
+      "active": true,
+      "components": {
+        "ComponentMesh": [
+          {
+            "ƒ.ComponentMesh": {
+              "idMesh": "MeshCube|2023-04-20T13:15:06.454Z|19870",
+              "pivot": {
+                "translation": "[0, 0, 0]",
+                "rotation": "[0, 0, 0]",
+                "scaling": "[1, 1, 1]"
+              },
+              "Component": {
+                "active": true
+              }
+            }
+          }
+        ],
+        "ComponentMaterial": [
+          {
+            "ƒ.ComponentMaterial": {
+              "sortForAlpha": false,
+              "clrPrimary": "[1, 0, 0, 1]",
+              "clrSecondary": "[1, 1, 1, 1]",
+              "pivot": {
+                "translation": "[0, 0]",
+                "rotation": 0,
+                "scaling": "[1, 1]"
+              },
+              "Component": {
+                "active": true
+              },
+              "idMaterial": "Material|2023-04-20T13:15:11.925Z|39362"
+            }
+          }
+        ],
+        "ComponentTransform": [
+          {
+            "ƒ.ComponentTransform": {
+              "local": {
+                "translation": "[0, 0, 0]",
+                "rotation": "[0, 0, 0]",
+                "scaling": "[1, 1, 1]"
+              },
+              "Component": {
+                "active": true
+              }
+            }
+          }
+        ]
+      },
+      "children": [],
+      "idResource": "Graph|2023-04-20T13:16:47.382Z|26427",
+      "type": "Graph"
+    }
+  },
+  "Animation|2023-05-22T14:51:24.543Z|66563": {
     "ƒ.Animation": {
-      "idResource": "Animation|2023-05-23T05:55:06.542Z|45657",
-      "name": "run",
+      "idResource": "Animation|2023-05-22T14:51:24.543Z|66563",
+      "name": "Walk",
       "labels": {},
-      "events": {},
+      "events": {
+        "Touch0": 250,
+        "Touch1": 750
+      },
       "framesPerSecond": 60,
       "animationStructure": {
         "children": {
@@ -38,267 +99,22 @@
                       "x": {
                         "keys": [
                           {
-                            "time": null,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 1,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 2,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 3,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 4,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 5,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 6,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 7,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 8,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 9,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 10,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 11,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 12,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 13,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 14,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 15,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 16,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 17,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 18,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 19,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 20,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 21,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 22,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 23,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 24,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 25,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 26,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 27,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 28,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 29,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 30,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 31,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 32,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 33,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
                             "time": 0,
-                            "value": 0,
+                            "value": -40,
                             "slopeIn": 0,
                             "slopeOut": 0,
                             "constant": false
                           },
                           {
-                            "time": 333.3333435058594,
-                            "value": 30,
+                            "time": 502.6455143758759,
+                            "value": 40,
                             "slopeIn": 0,
                             "slopeOut": 0,
                             "constant": false
                           },
                           {
-                            "time": 1133.3333740234375,
-                            "value": -30,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1566.6666259765625,
-                            "value": 0,
+                            "time": 1000,
+                            "value": -40,
                             "slopeIn": 0,
                             "slopeOut": 0,
                             "constant": false
@@ -321,511 +137,22 @@
                       "x": {
                         "keys": [
                           {
-                            "time": null,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 1,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 2,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 3,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 4,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 5,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 6,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 7,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 8,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 9,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 10,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 11,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 12,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 11,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 10,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 9,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 8,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 7,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 6,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 5,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 4,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 3,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 2,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 1,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -1,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -2,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -3,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -4,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -5,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -6,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -7,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -8,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -9,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -10,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -11,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -12,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -13,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -14,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -15,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -16,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -17,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -18,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -19,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -20,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -21,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -22,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -23,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -24,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -25,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -26,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -27,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -28,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -29,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -30,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": null,
-                            "value": -31,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
                             "time": 0,
-                            "value": 0,
+                            "value": 40,
                             "slopeIn": 0,
                             "slopeOut": 0,
                             "constant": false
                           },
                           {
-                            "time": 333.3333435058594,
-                            "value": -39,
+                            "time": 500,
+                            "value": -40,
                             "slopeIn": 0,
                             "slopeOut": 0,
                             "constant": false
                           },
                           {
-                            "time": 1133.3333740234375,
-                            "value": 30,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1566.6666259765625,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          }
-                        ],
-                        "animationSequence": true
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "ArmRight": {
-            "components": {
-              "ComponentTransform": [
-                {
-                  "mtxLocal": {
-                    "rotation": {
-                      "x": {
-                        "keys": [
-                          {
-                            "time": 0,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 333.3333435058594,
-                            "value": 30,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1133.3333740234375,
-                            "value": -30,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1566.6666259765625,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          }
-                        ],
-                        "animationSequence": true
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "ArmLeft": {
-            "components": {
-              "ComponentTransform": [
-                {
-                  "mtxLocal": {
-                    "rotation": {
-                      "x": {
-                        "keys": [
-                          {
-                            "time": 0,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 333.3333435058594,
-                            "value": -30,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1133.3333740234375,
-                            "value": 30,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1566.6666259765625,
-                            "value": 0,
+                            "time": 1000,
+                            "value": 40,
                             "slopeIn": 0,
                             "slopeOut": 0,
                             "constant": false
@@ -843,7 +170,16 @@
       }
     }
   },
-  "Graph|2023-04-20T13:15:04.086Z|49512": {
+  "MeshSphere|2023-05-25T12:31:15.132Z|84727": {
+    "ƒ.MeshSphere": {
+      "idResource": "MeshSphere|2023-05-25T12:31:15.132Z|84727",
+      "name": "MeshSphere",
+      "type": "MeshSphere",
+      "longitudes": 12,
+      "latitudes": 7
+    }
+  },
+  "Graph|2023-04-20T13:20:03.440Z|32173": {
     "ƒ.Graph": {
       "name": "Game",
       "active": true,
@@ -853,7 +189,7 @@
             "ƒ.ComponentLight": {
               "pivot": {
                 "translation": "[0, 0, 0]",
-                "rotation": "[30, 20, 0]",
+                "rotation": "[70, 30, 0]",
                 "scaling": "[1, 1, 1]"
               },
               "light": {
@@ -875,7 +211,7 @@
               },
               "light": {
                 "ƒ.LightAmbient": {
-                  "color": "[0.1803921568627451, 0.1803921568627451, 0.1803921568627451, 1]"
+                  "color": "[0.12941176470588237, 0.12941176470588237, 0.12941176470588237, 1]"
                 }
               },
               "Component": {
@@ -895,9 +231,9 @@
                 {
                   "ƒ.ComponentTransform": {
                     "local": {
-                      "translation": "[0, 10, 0]",
+                      "translation": "[0, 6, 0]",
                       "rotation": "[0, 0, 0]",
-                      "scaling": "[0.7999999523162842, 0.7999999523162842, 0.7999999523162842]"
+                      "scaling": "[1, 1, 1]"
                     },
                     "Component": {
                       "active": true
@@ -908,12 +244,12 @@
               "ComponentRigidbody": [
                 {
                   "ƒ.ComponentRigidbody": {
-                    "initialization": "TO_NODE",
+                    "initialization": "TO_PIVOT",
                     "friction": 0,
                     "restitution": 0.2,
                     "mass": 85,
-                    "dampTranslation": 2.8,
-                    "dampRotation": 3,
+                    "dampTranslation": 1,
+                    "dampRotation": 2.9999999999999996,
                     "effectGravity": 1,
                     "typeBody": "DYNAMIC",
                     "typeCollider": "CAPSULE",
@@ -922,7 +258,7 @@
                     "pivot": {
                       "translation": "[0, 0, 0]",
                       "rotation": "[0, 0, 0]",
-                      "scaling": "[1, 1, 1]"
+                      "scaling": "[0.49999991059303284, 0.49999991059303284, 0.49999991059303284]"
                     },
                     "Component": {
                       "active": true
@@ -933,17 +269,17 @@
               "JointRevolute": [
                 {
                   "ƒ.JointRevolute": {
-                    "motorTorque": 0,
+                    "motorTorque": 5,
                     "JointAxial": {
-                      "springDamping": 0,
+                      "springDamping": 1,
                       "springFrequency": 0,
-                      "maxMotor": 360,
-                      "minMotor": 0,
+                      "maxMotor": 90,
+                      "minMotor": -90,
                       "motorSpeed": 0,
                       "axis": "[0, 1, 0]",
                       "Joint": {
                         "nameChildToConnect": "Camera",
-                        "internalCollision": true,
+                        "internalCollision": false,
                         "breakForce": 0,
                         "breakTorque": 0,
                         "anchor": "[0, 0, 0]",
@@ -975,9 +311,9 @@
                           "projection": "central",
                           "fieldOfView": 45,
                           "direction": "diagonal",
-                          "aspect": 1,
+                          "aspect": 1.6728395061728396,
                           "pivot": {
-                            "translation": "[0, 0.800000011920929, 0]",
+                            "translation": "[0, 0, 0]",
                             "rotation": "[25, 0, 0]",
                             "scaling": "[1, 1, 1]"
                           },
@@ -991,9 +327,9 @@
                       {
                         "ƒ.ComponentTransform": {
                           "local": {
-                            "translation": "[0, 1.0000001192092896, -3.1000001430511475]",
+                            "translation": "[0, 0.8000000715255737, -1.7000001668930054]",
                             "rotation": "[0, 0, 0]",
-                            "scaling": "[0.9999998807907104, 1, 1]"
+                            "scaling": "[1, 1, 1]"
                           },
                           "Component": {
                             "active": true
@@ -1018,10 +354,10 @@
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
-                            "scaling": "[1, 1, 1]"
+                            "scaling": "[0.2999999225139618, 1, 1]"
                           },
                           "Component": {
-                            "active": false
+                            "active": true
                           }
                         }
                       }
@@ -1041,12 +377,12 @@
                           "Component": {
                             "active": true
                           },
-                          "idAnimation": "Animation|2023-05-25T02:18:46.748Z|51304",
+                          "idAnimation": "Animation|2023-05-22T14:51:24.543Z|66563",
                           "playmode": "loop",
                           "quantization": "continous",
                           "scale": 1,
                           "scaleWithGameTime": true,
-                          "animateInEditor": true
+                          "animateInEditor": false
                         }
                       }
                     ]
@@ -1060,25 +396,11 @@
                           "ComponentMesh": [
                             {
                               "ƒ.ComponentMesh": {
-                                "idMesh": "MeshCube|2023-04-20T13:03:52.158Z|47053",
+                                "idMesh": "MeshCube|2023-04-20T13:15:06.454Z|19870",
                                 "pivot": {
-                                  "translation": "[0, 0, 0]",
+                                  "translation": "[0, 0.1487879604101181, 0]",
                                   "rotation": "[0, 0, 0]",
-                                  "scaling": "[1, 1, 1]"
-                                },
-                                "Component": {
-                                  "active": true
-                                }
-                              }
-                            }
-                          ],
-                          "ComponentTransform": [
-                            {
-                              "ƒ.ComponentTransform": {
-                                "local": {
-                                  "translation": "[0, 0, 0]",
-                                  "rotation": "[0, 0, 0]",
-                                  "scaling": "[0.7000000476837158, 0.7999999523162842, 0.3999999165534973]"
+                                  "scaling": "[0.2480003833770752, 0.3999999165534973, 0.13999983668327332]"
                                 },
                                 "Component": {
                                   "active": true
@@ -1090,7 +412,7 @@
                             {
                               "ƒ.ComponentMaterial": {
                                 "sortForAlpha": false,
-                                "clrPrimary": "[0.1568627450980392, 0.5607843137254902, 0.2784313725490196, 1]",
+                                "clrPrimary": "[0.21176470588235294, 0.807843137254902, 0.6588235294117647, 1]",
                                 "clrSecondary": "[1, 1, 1, 1]",
                                 "pivot": {
                                   "translation": "[0, 0]",
@@ -1100,7 +422,21 @@
                                 "Component": {
                                   "active": true
                                 },
-                                "idMaterial": "Material|2023-04-20T13:14:40.166Z|03167"
+                                "idMaterial": "Material|2023-04-20T13:15:11.925Z|39362"
+                              }
+                            }
+                          ],
+                          "ComponentTransform": [
+                            {
+                              "ƒ.ComponentTransform": {
+                                "local": {
+                                  "translation": "[0, -0.10000000149011612, 0]",
+                                  "rotation": "[0, 0, 0]",
+                                  "scaling": "[1, 1, 1]"
+                                },
+                                "Component": {
+                                  "active": true
+                                }
                               }
                             }
                           ]
@@ -1114,25 +450,11 @@
                                 "ComponentMesh": [
                                   {
                                     "ƒ.ComponentMesh": {
-                                      "idMesh": "MeshCube|2023-04-20T13:03:52.158Z|47053",
+                                      "idMesh": "MeshCube|2023-04-20T13:15:06.454Z|19870",
                                       "pivot": {
-                                        "translation": "[0, -0.30000001192092896, 0]",
+                                        "translation": "[0, 0.4356279671192169, 0]",
                                         "rotation": "[0, 0, 0]",
-                                        "scaling": "[1, 1, 1]"
-                                      },
-                                      "Component": {
-                                        "active": true
-                                      }
-                                    }
-                                  }
-                                ],
-                                "ComponentTransform": [
-                                  {
-                                    "ƒ.ComponentTransform": {
-                                      "local": {
-                                        "translation": "[0, 0.8999999761581421, 0]",
-                                        "rotation": "[0, 0, -1.6885124444961548]",
-                                        "scaling": "[0.7000000476837158, 0.5, 1.100000023841858]"
+                                        "scaling": "[0.1529999077320099, 0.15099948644638062, 0.15999998152256012]"
                                       },
                                       "Component": {
                                         "active": true
@@ -1144,7 +466,7 @@
                                   {
                                     "ƒ.ComponentMaterial": {
                                       "sortForAlpha": false,
-                                      "clrPrimary": "[1, 0.8666666666666667, 0.5803921568627451, 1]",
+                                      "clrPrimary": "[0.21176470588235294, 0.807843137254902, 0.6588235294117647, 1]",
                                       "clrSecondary": "[1, 1, 1, 1]",
                                       "pivot": {
                                         "translation": "[0, 0]",
@@ -1154,7 +476,7 @@
                                       "Component": {
                                         "active": true
                                       },
-                                      "idMaterial": "Material|2023-04-20T13:14:40.166Z|03167"
+                                      "idMaterial": "Material|2023-04-20T13:15:11.925Z|39362"
                                     }
                                   }
                                 ]
@@ -1173,25 +495,11 @@
                           "ComponentMesh": [
                             {
                               "ƒ.ComponentMesh": {
-                                "idMesh": "MeshCube|2023-04-20T13:03:52.158Z|47053",
+                                "idMesh": "MeshCube|2023-04-20T13:15:06.454Z|19870",
                                 "pivot": {
-                                  "translation": "[0, -0.5300000309944153, 0]",
+                                  "translation": "[-0.07981224358081818, -0.31971800327301025, 0]",
                                   "rotation": "[0, 0, 0]",
-                                  "scaling": "[1, 1, 1]"
-                                },
-                                "Component": {
-                                  "active": true
-                                }
-                              }
-                            }
-                          ],
-                          "ComponentTransform": [
-                            {
-                              "ƒ.ComponentTransform": {
-                                "local": {
-                                  "translation": "[0.20000000298023224, -0.3800000846385956, 0]",
-                                  "rotation": "[-25.487747192382812, 0, 0]",
-                                  "scaling": "[0.30000001192092896, 0.5999999046325684, 0.2999999225139618]"
+                                  "scaling": "[0.06400015205144882, 0.35999950766563416, 0.06999985128641129]"
                                 },
                                 "Component": {
                                   "active": true
@@ -1203,7 +511,7 @@
                             {
                               "ƒ.ComponentMaterial": {
                                 "sortForAlpha": false,
-                                "clrPrimary": "[0.43137254901960786, 0.4980392156862745, 0.8313725490196079, 1]",
+                                "clrPrimary": "[0.21176470588235294, 0.807843137254902, 0.6588235294117647, 1]",
                                 "clrSecondary": "[1, 1, 1, 1]",
                                 "pivot": {
                                   "translation": "[0, 0]",
@@ -1213,7 +521,21 @@
                                 "Component": {
                                   "active": true
                                 },
-                                "idMaterial": "Material|2023-04-20T13:14:40.166Z|03167"
+                                "idMaterial": "Material|2023-04-20T13:15:11.925Z|39362"
+                              }
+                            }
+                          ],
+                          "ComponentTransform": [
+                            {
+                              "ƒ.ComponentTransform": {
+                                "local": {
+                                  "translation": "[0, 0, 0]",
+                                  "rotation": "[6.660549163818359, 0, 0]",
+                                  "scaling": "[1, 1, 1]"
+                                },
+                                "Component": {
+                                  "active": true
+                                }
                               }
                             }
                           ]
@@ -1229,25 +551,11 @@
                           "ComponentMesh": [
                             {
                               "ƒ.ComponentMesh": {
-                                "idMesh": "MeshCube|2023-04-20T13:03:52.158Z|47053",
+                                "idMesh": "MeshCube|2023-04-20T13:15:06.454Z|19870",
                                 "pivot": {
-                                  "translation": "[0, -0.5300000309944153, 0]",
+                                  "translation": "[0.07999999821186066, -0.31971800327301025, 0]",
                                   "rotation": "[0, 0, 0]",
-                                  "scaling": "[1, 1, 1]"
-                                },
-                                "Component": {
-                                  "active": true
-                                }
-                              }
-                            }
-                          ],
-                          "ComponentTransform": [
-                            {
-                              "ƒ.ComponentTransform": {
-                                "local": {
-                                  "translation": "[-0.19999995827674866, -0.3800000548362732, 0]",
-                                  "rotation": "[23.61499786376953, 0, 0]",
-                                  "scaling": "[0.30000001192092896, 0.5999999046325684, 0.2999999225139618]"
+                                  "scaling": "[0.06400015205144882, 0.35999950766563416, 0.06999985128641129]"
                                 },
                                 "Component": {
                                   "active": true
@@ -1259,7 +567,7 @@
                             {
                               "ƒ.ComponentMaterial": {
                                 "sortForAlpha": false,
-                                "clrPrimary": "[0.4470588235294118, 0.4745098039215686, 0.6941176470588235, 1]",
+                                "clrPrimary": "[0.21176470588235294, 0.807843137254902, 0.6588235294117647, 1]",
                                 "clrSecondary": "[1, 1, 1, 1]",
                                 "pivot": {
                                   "translation": "[0, 0]",
@@ -1269,31 +577,7 @@
                                 "Component": {
                                   "active": true
                                 },
-                                "idMaterial": "Material|2023-04-20T13:14:40.166Z|03167"
-                              }
-                            }
-                          ]
-                        },
-                        "children": []
-                      }
-                    },
-                    {
-                      "ƒ.Node": {
-                        "name": "ArmRight",
-                        "active": true,
-                        "components": {
-                          "ComponentMesh": [
-                            {
-                              "ƒ.ComponentMesh": {
-                                "idMesh": "MeshCube|2023-04-20T13:03:52.158Z|47053",
-                                "pivot": {
-                                  "translation": "[0, -0.5, 0]",
-                                  "rotation": "[0, 0, 0]",
-                                  "scaling": "[1, 1, 1]"
-                                },
-                                "Component": {
-                                  "active": true
-                                }
+                                "idMaterial": "Material|2023-04-20T13:15:11.925Z|39362"
                               }
                             }
                           ],
@@ -1301,87 +585,13 @@
                             {
                               "ƒ.ComponentTransform": {
                                 "local": {
-                                  "translation": "[-0.4000000059604645, 0.4000000059604645, 0]",
-                                  "rotation": "[-13.342823028564453, 0, -13.176777839660645]",
-                                  "scaling": "[0.20000001788139343, 0.6999999284744263, 0.19999992847442627]"
-                                },
-                                "Component": {
-                                  "active": true
-                                }
-                              }
-                            }
-                          ],
-                          "ComponentMaterial": [
-                            {
-                              "ƒ.ComponentMaterial": {
-                                "sortForAlpha": false,
-                                "clrPrimary": "[0.3058823529411765, 0.5490196078431373, 0.3058823529411765, 1]",
-                                "clrSecondary": "[1, 1, 1, 1]",
-                                "pivot": {
-                                  "translation": "[0, 0]",
-                                  "rotation": 0,
-                                  "scaling": "[1, 1]"
-                                },
-                                "Component": {
-                                  "active": true
-                                },
-                                "idMaterial": "Material|2023-04-20T13:14:40.166Z|03167"
-                              }
-                            }
-                          ]
-                        },
-                        "children": []
-                      }
-                    },
-                    {
-                      "ƒ.Node": {
-                        "name": "ArmLeft",
-                        "active": true,
-                        "components": {
-                          "ComponentMesh": [
-                            {
-                              "ƒ.ComponentMesh": {
-                                "idMesh": "MeshCube|2023-04-20T13:03:52.158Z|47053",
-                                "pivot": {
-                                  "translation": "[0, -0.5, 0]",
-                                  "rotation": "[0, 0, 0]",
+                                  "translation": "[0, 0, 0]",
+                                  "rotation": "[-6.311857223510742, 0, 0]",
                                   "scaling": "[1, 1, 1]"
                                 },
                                 "Component": {
                                   "active": true
                                 }
-                              }
-                            }
-                          ],
-                          "ComponentTransform": [
-                            {
-                              "ƒ.ComponentTransform": {
-                                "local": {
-                                  "translation": "[0.4000000059604645, 0.4000000059604645, 0]",
-                                  "rotation": "[13.342823028564453, 0, 13.176777839660645]",
-                                  "scaling": "[0.20000001788139343, 0.6999999284744263, 0.19999992847442627]"
-                                },
-                                "Component": {
-                                  "active": true
-                                }
-                              }
-                            }
-                          ],
-                          "ComponentMaterial": [
-                            {
-                              "ƒ.ComponentMaterial": {
-                                "sortForAlpha": false,
-                                "clrPrimary": "[0.3058823529411765, 0.5490196078431373, 0.3058823529411765, 1]",
-                                "clrSecondary": "[1, 1, 1, 1]",
-                                "pivot": {
-                                  "translation": "[0, 0]",
-                                  "rotation": 0,
-                                  "scaling": "[1, 1]"
-                                },
-                                "Component": {
-                                  "active": true
-                                },
-                                "idMaterial": "Material|2023-04-20T13:14:40.166Z|03167"
                               }
                             }
                           ]
@@ -1394,302 +604,99 @@
               }
             ]
           }
+        },
+        {
+          "ƒ.Node": {
+            "name": "NPC",
+            "active": true,
+            "components": {
+              "ComponentTransform": [
+                {
+                  "ƒ.ComponentTransform": {
+                    "local": {
+                      "translation": "[2, 6, 2]",
+                      "rotation": "[0, 0, 0]",
+                      "scaling": "[1, 1, 1]"
+                    },
+                    "Component": {
+                      "active": true
+                    }
+                  }
+                }
+              ],
+              "ComponentRigidbody": [
+                {
+                  "ƒ.ComponentRigidbody": {
+                    "initialization": "TO_MESH",
+                    "friction": 0.2,
+                    "restitution": 0.2,
+                    "mass": 1,
+                    "dampTranslation": 0.1,
+                    "dampRotation": 0.1,
+                    "effectGravity": 1,
+                    "typeBody": "DYNAMIC",
+                    "typeCollider": "SPHERE",
+                    "isTrigger": false,
+                    "id": 2,
+                    "pivot": {
+                      "translation": "[0, 0, 0]",
+                      "rotation": "[0, 0, 0]",
+                      "scaling": "[0.49999991059303284, 0.49999991059303284, 0.49999991059303284]"
+                    },
+                    "Component": {
+                      "active": true
+                    }
+                  }
+                }
+              ],
+              "ComponentMesh": [
+                {
+                  "ƒ.ComponentMesh": {
+                    "idMesh": "MeshSphere|2023-05-25T12:31:15.132Z|84727",
+                    "pivot": {
+                      "translation": "[0, 0, 0]",
+                      "rotation": "[0, 0, 0]",
+                      "scaling": "[0.49999991059303284, 0.49999991059303284, 0.49999991059303284]"
+                    },
+                    "Component": {
+                      "active": true
+                    }
+                  }
+                }
+              ],
+              "ComponentMaterial": [
+                {
+                  "ƒ.ComponentMaterial": {
+                    "sortForAlpha": false,
+                    "clrPrimary": "[1, 1, 1, 1]",
+                    "clrSecondary": "[1, 1, 1, 1]",
+                    "pivot": {
+                      "translation": "[0, 0]",
+                      "rotation": 0,
+                      "scaling": "[1, 1]"
+                    },
+                    "Component": {
+                      "active": true
+                    },
+                    "idMaterial": "Material|2023-04-20T13:15:11.925Z|39362"
+                  }
+                }
+              ],
+              "CritterMover": [
+                {
+                  "Script.CritterMover": {
+                    "active": true,
+                    "message": "Hello, I'm the first Minecraft-Critter"
+                  }
+                }
+              ]
+            },
+            "children": []
+          }
         }
       ],
-      "idResource": "Graph|2023-04-20T13:15:04.086Z|49512",
+      "idResource": "Graph|2023-04-20T13:20:03.440Z|32173",
       "type": "Graph"
-    }
-  },
-  "Graph|2023-04-20T13:20:07.943Z|28797": {
-    "ƒ.Graph": {
-      "name": "Cube",
-      "active": true,
-      "components": {
-        "ComponentMesh": [
-          {
-            "ƒ.ComponentMesh": {
-              "idMesh": "MeshCube|2023-04-20T13:03:52.158Z|47053",
-              "pivot": {
-                "translation": "[0, 0, 0]",
-                "rotation": "[0, 0, 0]",
-                "scaling": "[1, 1, 1]"
-              },
-              "Component": {
-                "active": true
-              }
-            }
-          }
-        ],
-        "ComponentMaterial": [
-          {
-            "ƒ.ComponentMaterial": {
-              "sortForAlpha": false,
-              "clrPrimary": "[0.9098039215686274, 0.06666666666666667, 0.06666666666666667, 1]",
-              "clrSecondary": "[1, 1, 1, 1]",
-              "pivot": {
-                "translation": "[0, 0]",
-                "rotation": 0,
-                "scaling": "[1, 1]"
-              },
-              "Component": {
-                "active": true
-              },
-              "idMaterial": "Material|2023-04-20T13:14:40.166Z|03167"
-            }
-          }
-        ],
-        "ComponentTransform": [
-          {
-            "ƒ.ComponentTransform": {
-              "local": {
-                "translation": "[1, 0, 0]",
-                "rotation": "[0, 0, 0]",
-                "scaling": "[1, 1, 1]"
-              },
-              "Component": {
-                "active": true
-              }
-            }
-          }
-        ]
-      },
-      "children": [],
-      "idResource": "Graph|2023-04-20T13:20:07.943Z|28797",
-      "type": "Graph"
-    }
-  },
-  "Animation|2023-05-25T02:18:46.748Z|51304": {
-    "ƒ.Animation": {
-      "idResource": "Animation|2023-05-25T02:18:46.748Z|51304",
-      "name": "jump",
-      "labels": {},
-      "events": {},
-      "framesPerSecond": 60,
-      "animationStructure": {
-        "children": {
-          "LegLeft": {
-            "components": {
-              "ComponentTransform": [
-                {
-                  "mtxLocal": {
-                    "rotation": {
-                      "x": {
-                        "keys": [
-                          {
-                            "time": 0,
-                            "value": -44,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 506.1541167764571,
-                            "value": 37,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1000,
-                            "value": -44,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          }
-                        ],
-                        "animationSequence": true
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "LegRight": {
-            "components": {
-              "ComponentTransform": [
-                {
-                  "mtxLocal": {
-                    "rotation": {
-                      "x": {
-                        "keys": [
-                          {
-                            "time": 0,
-                            "value": 44,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 506.1541167764571,
-                            "value": -35,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1000,
-                            "value": 40.97993231415967,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1006.9556816009049,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          }
-                        ],
-                        "animationSequence": true
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  },
-  "Animation|2023-05-25T02:19:12.603Z|53853": {
-    "ƒ.Animation": {
-      "idResource": "Animation|2023-05-25T02:19:12.603Z|53853",
-      "name": "idle",
-      "labels": {},
-      "events": {},
-      "framesPerSecond": 60,
-      "animationStructure": {
-        "children": {
-          "Body": {
-            "children": {
-              "Head": {
-                "components": {
-                  "ComponentTransform": [
-                    {
-                      "mtxLocal": {
-                        "rotation": {
-                          "z": {
-                            "keys": [
-                              {
-                                "time": 0.4148926253533465,
-                                "value": 0,
-                                "slopeIn": 0,
-                                "slopeOut": 0,
-                                "constant": false
-                              },
-                              {
-                                "time": 350,
-                                "value": 2,
-                                "slopeIn": 0,
-                                "slopeOut": 0,
-                                "constant": false
-                              },
-                              {
-                                "time": 691.7392014406571,
-                                "value": -2,
-                                "slopeIn": 0,
-                                "slopeOut": 0,
-                                "constant": false
-                              },
-                              {
-                                "time": 1000,
-                                "value": 0,
-                                "slopeIn": 0,
-                                "slopeOut": 0,
-                                "constant": false
-                              }
-                            ],
-                            "animationSequence": true
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "ArmRight": {
-            "components": {
-              "ComponentTransform": [
-                {
-                  "mtxLocal": {
-                    "rotation": {
-                      "z": {
-                        "keys": [
-                          {
-                            "time": 0,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 498.96564127265185,
-                            "value": -16,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1000.8286151053431,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          }
-                        ],
-                        "animationSequence": true
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "ArmLeft": {
-            "components": {
-              "ComponentTransform": [
-                {
-                  "mtxLocal": {
-                    "rotation": {
-                      "z": {
-                        "keys": [
-                          {
-                            "time": 0,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 498.96564127265185,
-                            "value": 16,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          },
-                          {
-                            "time": 1000.8286151053431,
-                            "value": 0,
-                            "slopeIn": 0,
-                            "slopeOut": 0,
-                            "constant": false
-                          }
-                        ],
-                        "animationSequence": true
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
     }
   }
 }

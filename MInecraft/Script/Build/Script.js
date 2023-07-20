@@ -26,11 +26,12 @@ var Script;
 (function (Script) {
     var ƒ = FudgeCore;
     ƒ.Project.registerScriptNamespace(Script); // Register the namespace to FUDGE for serialization
-    class CustomComponentScript extends ƒ.ComponentScript {
+    class CritterMover extends ƒ.ComponentScript {
         // Register the script as component for use in the editor via drag&drop
-        static iSubclass = ƒ.Component.registerSubclass(CustomComponentScript);
+        static iSubclass = ƒ.Component.registerSubclass(CritterMover);
         // Properties may be mutated by users in the editor via the automatically created user interface
         message = "CustomComponentScript added to ";
+        #cmpRigidbody;
         constructor() {
             super();
             // Don't start when running in editor
@@ -52,12 +53,44 @@ var Script;
                     this.removeEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
                     break;
                 case "nodeDeserialized" /* NODE_DESERIALIZED */:
-                    // if deserialized the node is now fully reconstructed and access to all its components and children is possible
+                    this.#cmpRigidbody = this.node.getComponent(ƒ.ComponentRigidbody);
+                    console.log(this.#cmpRigidbody);
+                    this.node.addEventListener("renderPrepare" /* RENDER_PREPARE */, this.hndEvent);
+                    break;
+                case "renderPrepare" /* RENDER_PREPARE */:
+                    console.log("Rendering Node");
+                    if (!Script.steve)
+                        return;
+                    let vctDiff = ƒ.Vector3.DIFFERENCE(Script.steve.mtxWorld.translation, this.node.mtxWorld.translation);
+                    vctDiff.normalize(3);
+                    this.#cmpRigidbody.applyForce(vctDiff);
                     break;
             }
         };
     }
-    Script.CustomComponentScript = CustomComponentScript;
+    Script.CritterMover = CritterMover;
+})(Script || (Script = {}));
+var Script;
+(function (Script) {
+    var ƒ = FudgeCore;
+    var ƒUi = FudgeUserInterface;
+    class Gamestate extends ƒ.Mutable {
+        points;
+        health;
+        name;
+        constructor() {
+            super();
+            this.points = 0;
+            this.health = 100;
+            this.name = "Steve";
+            let vui = document.querySelector("div#vui");
+            new ƒUi.Controller(this, vui);
+            this.addEventListener("mutate" /* MUTATE */, () => console.log(this));
+        }
+        reduceMutator(_mutator) {
+        }
+    }
+    Script.Gamestate = Gamestate;
 })(Script || (Script = {}));
 var Script;
 (function (Script) {
@@ -65,10 +98,19 @@ var Script;
     ƒ.Debug.info("Main Program Template running!");
     Script.grid3D = [];
     Script.gridAssoc = {};
-    let steve;
+    let config;
     let isGrounded = false;
+    let MINECRAFT;
+    (function (MINECRAFT) {
+        MINECRAFT["STEVE_COLLIDES"] = "steveCollides";
+    })(MINECRAFT || (MINECRAFT = {}));
     document.addEventListener("interactiveViewportStarted", start);
     async function start(_event) {
+        let response = await fetch("config.json");
+        config = await response.json();
+        console.log(config);
+        let gamestate = new Script.Gamestate();
+        console.log(gamestate);
         Script.viewport = _event.detail;
         Script.viewport.physicsDebugMode = ƒ.PHYSICS_DEBUGMODE.COLLIDERS;
         Script.viewport.canvas.addEventListener("contextmenu", _event => _event.preventDefault());
@@ -76,7 +118,7 @@ var Script;
         let pickAlgorithm = [Script.pickByComponent, Script.pickByCamera, Script.pickByRadius, Script.pickByGrid];
         Script.viewport.canvas.addEventListener("pointerdown", pickAlgorithm[1]);
         Script.viewport.getBranch().addEventListener("pointerdown", Script.hitComponent);
-        Script.viewport.getBranch().addEventListener("steveCollided", (_event) => console.log(_event));
+        Script.viewport.getBranch().addEventListener(MINECRAFT.STEVE_COLLIDES, (_event) => console.log(_event));
         setupSteve();
         ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
         ƒ.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
@@ -86,47 +128,37 @@ var Script;
         ƒ.Physics.simulate(); // if physics is included and used
         Script.viewport.draw();
         ƒ.AudioManager.default.update();
-        changeAnimation("idle");
     }
     function setupSteve() {
         // console.log(ƒ.Physics.settings.sleepingAngularVelocityThreshold);
-        steve = Script.viewport.getBranch().getChildrenByName("Steve")[0];
-        console.log(steve);
-        Script.viewport.camera = steve.getChild(0).getComponent(ƒ.ComponentCamera);
-        let cmpRigidbody = steve.getComponent(ƒ.ComponentRigidbody);
+        Script.steve = Script.viewport.getBranch().getChildrenByName("Steve")[0];
+        console.log(Script.steve);
+        Script.viewport.camera = Script.steve.getChild(0).getComponent(ƒ.ComponentCamera);
+        let cmpRigidbody = Script.steve.getComponent(ƒ.ComponentRigidbody);
         cmpRigidbody.effectRotation = ƒ.Vector3.Y();
         cmpRigidbody.addEventListener("ColliderEnteredCollision" /* COLLISION_ENTER */, steveCollides);
     }
     function controlSteve() {
-        let cmpRigidbody = steve.getComponent(ƒ.ComponentRigidbody);
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.A, ƒ.KEYBOARD_CODE.ARROW_LEFT])) {
-            cmpRigidbody.applyTorque(ƒ.Vector3.Y(5));
-            changeAnimation("run");
-        }
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.D, ƒ.KEYBOARD_CODE.ARROW_RIGHT])) {
-            cmpRigidbody.applyTorque(ƒ.Vector3.Y(-5));
-            changeAnimation("run");
-        }
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.W, ƒ.KEYBOARD_CODE.ARROW_UP])) {
-            cmpRigidbody.applyForce(ƒ.Vector3.SCALE(steve.mtxWorld.getZ(), 1000));
-            changeAnimation("run");
-        }
-        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.S, ƒ.KEYBOARD_CODE.ARROW_DOWN])) {
-            cmpRigidbody.applyForce(ƒ.Vector3.SCALE(steve.mtxWorld.getZ(), -1000));
-            changeAnimation("run");
-        }
+        let cmpRigidbody = Script.steve.getComponent(ƒ.ComponentRigidbody);
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.A, ƒ.KEYBOARD_CODE.ARROW_LEFT]))
+            cmpRigidbody.applyTorque(ƒ.Vector3.Y(config.torque));
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.D, ƒ.KEYBOARD_CODE.ARROW_RIGHT]))
+            cmpRigidbody.applyTorque(ƒ.Vector3.Y(-config.torque));
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.W, ƒ.KEYBOARD_CODE.ARROW_UP]))
+            cmpRigidbody.applyForce(ƒ.Vector3.SCALE(Script.steve.mtxWorld.getZ(), config.force));
+        if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.S, ƒ.KEYBOARD_CODE.ARROW_DOWN]))
+            cmpRigidbody.applyForce(ƒ.Vector3.SCALE(Script.steve.mtxWorld.getZ(), -config.force));
         if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.SPACE]) && isGrounded) {
             cmpRigidbody.addVelocity(ƒ.Vector3.Y(5));
             isGrounded = false;
-            changeAnimation("jump");
         }
     }
     function steveCollides(_event) {
         // let vctCollision: ƒ.Vector3 = ƒ.Vector3.DIFFERENCE(_event.collisionPoint, steve.mtxWorld.translation);
         //if (Math.abs(vctCollision.x) < 0.1 && Math.abs(vctCollision.z) < 0.1 && vctCollision.y < 0) // collision below steve
         isGrounded = true;
-        let customEvent = new CustomEvent("steveCollided", { bubbles: true, detail: steve.mtxWorld.translation });
-        steve.dispatchEvent(customEvent);
+        let customEvent = new CustomEvent(MINECRAFT.STEVE_COLLIDES, { bubbles: true, detail: Script.steve.mtxWorld.translation });
+        Script.steve.dispatchEvent(customEvent);
     }
     function generateWorld(_width, _height, _depth) {
         Script.blocks = new ƒ.Node("Blocks");
@@ -149,7 +181,7 @@ var Script;
     function createBlock(_vctPosition, _txtColor) {
         let block = new Script.Block(_vctPosition, ƒ.Color.CSS(_txtColor));
         block.name = _vctPosition.toString() + "|" + _txtColor;
-        console.log(block.name);
+        // console.log(block.name);
         Script.blocks.addChild(block);
         Script.gridAssoc[_vctPosition.toString()] = block;
         try {
@@ -158,15 +190,6 @@ var Script;
         catch (_e) { }
     }
     Script.createBlock = createBlock;
-    function changeAnimation(_animation) {
-        steve = Script.viewport.getBranch().getChildrenByName("Steve")[0];
-        let geometry = steve.getChildrenByName("Geometry")[0];
-        let currentAnim = geometry.getComponent(ƒ.ComponentAnimator).animation;
-        const newAnim = ƒ.Project.getResourcesByName(_animation)[0];
-        if (currentAnim != newAnim) {
-            geometry.getComponent(ƒ.ComponentAnimator).animation = newAnim;
-        }
-    }
 })(Script || (Script = {}));
 var Script;
 (function (Script) {

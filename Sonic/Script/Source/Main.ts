@@ -26,7 +26,7 @@ namespace Script {
 
 
     ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, update);
-    ƒ.Loop.start();  // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
+    ƒ.Loop.start();
   }
 
   function update(_event: Event): void {
@@ -34,12 +34,11 @@ namespace Script {
     movement();
     viewport.draw();
     addAudio();
-    //ƒ.AudioManager.default.update();
+    ƒ.AudioManager.default.update();
   }
 
   function movement(): void {
     let timeFrame: number = ƒ.Loop.timeFrameGame / 1000;
-    // ƒ.Physics.simulate();  // if physics is included and used
     if (ƒ.Keyboard.isPressedOne([ƒ.KEYBOARD_CODE.ARROW_RIGHT, ƒ.KEYBOARD_CODE.D])) {
       sonic.mtxLocal.rotation = ƒ.Vector3.Y(0);
       sonic.mtxLocal.translateX(2 * timeFrame);

@@ -1,0 +1,36 @@
+html, body {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+ overflow: hidden;
+}
+
+dialog { 
+  text-align: center; 
+}
+
+canvas.fullscreen { 
+  width: 100vw; 
+  height: 100vh; 
+}
+
+#heart{
+  position: absolute;
+  top:10px;
+  left:30px;
+  z-index: 0
+  
+}
+
+#points{
+  color: black;
+  position: absolute;
+  top:30px;
+  left:10px;
+  z-index: 0;
+  font-size: large;
+  align-items: center;
+
+  
+}

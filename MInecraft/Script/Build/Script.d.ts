@@ -8,11 +8,22 @@ declare namespace Script {
 }
 declare namespace Script {
     import ƒ = FudgeCore;
-    class CustomComponentScript extends ƒ.ComponentScript {
+    class CritterMover extends ƒ.ComponentScript {
+        #private;
         static readonly iSubclass: number;
         message: string;
         constructor();
         hndEvent: (_event: Event) => void;
+    }
+}
+declare namespace Script {
+    import ƒ = FudgeCore;
+    class Gamestate extends ƒ.Mutable {
+        points: number;
+        health: number;
+        name: string;
+        constructor();
+        protected reduceMutator(_mutator: ƒ.Mutator): void;
     }
 }
 declare namespace Script {
@@ -23,6 +34,7 @@ declare namespace Script {
     let gridAssoc: {
         [pos: string]: Block;
     };
+    let steve: ƒ.Node;
     function createBlock(_vctPosition: ƒ.Vector3, _txtColor: string): void;
 }
 declare namespace Script {

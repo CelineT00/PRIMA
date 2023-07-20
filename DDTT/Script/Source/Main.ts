@@ -10,16 +10,19 @@ namespace Script {
   export let isGrounded: boolean = true;
   export let vui: VisualUi;
 
-  document.addEventListener("interactiveViewportStarted", <EventListener>start);
+  document.addEventListener("interactiveViewportStarted", <EventListener><unknown>start);
 
-  function start(_event: CustomEvent): void {
+  async function start(_event: CustomEvent):Promise <void> {
+    let response = await fetch("config.json");
+    let config:{[key: string]: number}= await response.json();
     viewport = _event.detail;
     character = viewport.getBranch().getChildrenByName("Character")[0];
     ket = character.getChildrenByName("Ket")[0];
+    
 
     let cmpCamera: ƒ.ComponentCamera = viewport.getBranch().getComponent(ƒ.ComponentCamera);
     viewport.camera = cmpCamera;
-
+    vui = new VisualUi(config);
     ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, update);
     ƒ.Loop.start();
   }

@@ -2,43 +2,6 @@
 var Script;
 (function (Script) {
     var ƒ = FudgeCore;
-    ƒ.Project.registerScriptNamespace(Script); // Register the namespace to FUDGE for serialization
-    class CustomComponentScript extends ƒ.ComponentScript {
-        // Register the script as component for use in the editor via drag&drop
-        static iSubclass = ƒ.Component.registerSubclass(CustomComponentScript);
-        // Properties may be mutated by users in the editor via the automatically created user interface
-        message = "CustomComponentScript added to ";
-        constructor() {
-            super();
-            // Don't start when running in editor
-            if (ƒ.Project.mode == ƒ.MODE.EDITOR)
-                return;
-            // Listen to this component being added to or removed from a node
-            this.addEventListener("componentAdd" /* COMPONENT_ADD */, this.hndEvent);
-            this.addEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
-            this.addEventListener("nodeDeserialized" /* NODE_DESERIALIZED */, this.hndEvent);
-        }
-        // Activate the functions of this component as response to events
-        hndEvent = (_event) => {
-            switch (_event.type) {
-                case "componentAdd" /* COMPONENT_ADD */:
-                    ƒ.Debug.log(this.message, this.node);
-                    break;
-                case "componentRemove" /* COMPONENT_REMOVE */:
-                    this.removeEventListener("componentAdd" /* COMPONENT_ADD */, this.hndEvent);
-                    this.removeEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
-                    break;
-                case "nodeDeserialized" /* NODE_DESERIALIZED */:
-                    // if deserialized the node is now fully reconstructed and access to all its components and children is possible
-                    break;
-            }
-        };
-    }
-    Script.CustomComponentScript = CustomComponentScript;
-})(Script || (Script = {}));
-var Script;
-(function (Script) {
-    var ƒ = FudgeCore;
     Script.points = 0;
     ƒ.Debug.info("Main Program Template running!");
     function movement() {
@@ -134,7 +97,7 @@ var Script;
                 }
                 else {
                     Script.viewport.getBranch().getChildrenByName("Collectibles")[0].removeChild(food);
-                    Script.points++;
+                    Script.vui.points++;
                     Script.addAudioSound("food.mp3");
                     return food;
                 }
@@ -151,13 +114,18 @@ var Script;
     Script.gravity = -9.81;
     Script.ySpeed = 0;
     Script.isGrounded = true;
+    let stateMachine;
     document.addEventListener("interactiveViewportStarted", start);
     async function start(_event) {
         let response = await fetch("config.json");
         let config = await response.json();
         Script.viewport = _event.detail;
         Script.character = Script.viewport.getBranch().getChildrenByName("Character")[0];
+        Script.opponents = Script.viewport.getBranch().getChildrenByName("Gegner")[0];
+        Script.opponent = Script.opponents.getChildrenByName("Gegner1")[0];
+        Script.opponentDoggo = Script.opponents.getChildrenByName("Gegner2")[0];
         Script.ket = Script.character.getChildrenByName("Ket")[0];
+        stateMachine = new Script.actions();
         let cmpCamera = Script.viewport.getBranch().getComponent(ƒ.ComponentCamera);
         Script.viewport.camera = cmpCamera;
         Script.vui = new Script.VisualUi(config);
@@ -165,6 +133,7 @@ var Script;
         ƒ.Loop.start();
     }
     function update(_event) {
+        ƒ.Physics.simulate();
         followCamera();
         Script.movement();
         Script.viewport.draw();
@@ -189,13 +158,96 @@ var Script;
         audio.play(true);
     }
     Script.addAudioSound = addAudioSound;
-    /*function reset(): void {
-      console.log("Reset");
-      vui.points = 0;
-      vui.heart = 1;
-  
-      ket.dispatchEvent(new Event("Reset", { bubbles: true }));
-    }*/
+})(Script || (Script = {}));
+var Script;
+(function (Script) {
+    var ƒ = FudgeCore;
+    ƒ.Project.registerScriptNamespace(Script); // Register the namespace to FUDGE for serialization
+    class OpponentMovementScript extends ƒ.ComponentScript {
+        // Register the script as component for use in the editor via drag&drop
+        static iSubclass = ƒ.Component.registerSubclass(OpponentMovementScript);
+        // Properties may be mutated by users in the editor via the automatically created user interface
+        message = "CustomComponentScript added to ";
+        cmpRigidbody;
+        constructor() {
+            super();
+            // Don't start when running in editor
+            if (ƒ.Project.mode == ƒ.MODE.EDITOR)
+                return;
+            // Listen to this component being added to or removed from a node
+            this.addEventListener("componentAdd" /* COMPONENT_ADD */, this.hndEvent);
+            this.addEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
+            this.addEventListener("nodeDeserialized" /* NODE_DESERIALIZED */, this.hndEvent);
+        }
+        // Activate the functions of this component as response to events
+        hndEvent = (_event) => {
+            switch (_event.type) {
+                case "componentAdd" /* COMPONENT_ADD */:
+                    break;
+                case "componentRemove" /* COMPONENT_REMOVE */:
+                    this.removeEventListener("componentAdd" /* COMPONENT_ADD */, this.hndEvent);
+                    this.removeEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
+                    break;
+                case "nodeDeserialized" /* NODE_DESERIALIZED */:
+                    this.cmpRigidbody = this.node.getComponent(ƒ.ComponentRigidbody);
+                    this.update();
+                    this.cmpRigidbody.addEventListener("ColliderEnteredCollision" /* COLLISION_ENTER */, this.hndCollision);
+                    // if deserialized the node is now fully reconstructed and access to all its components and children is possible
+                    break;
+            }
+        };
+        update = () => {
+            console.log(this.cmpRigidbody);
+            this.cmpRigidbody.addVelocity(ƒ.Vector3.X(-3));
+        };
+        async hndCollision(_event) {
+            Script.opponents.removeChild(Script.opponentDoggo);
+        }
+    }
+    Script.OpponentMovementScript = OpponentMovementScript;
+})(Script || (Script = {}));
+var Script;
+(function (Script) {
+    var ƒ = FudgeCore;
+    ƒ.Project.registerScriptNamespace(Script); // Register the namespace to FUDGE for serialization
+    class OpponentScript extends ƒ.ComponentScript {
+        // Register the script as component for use in the editor via drag&drop
+        static iSubclass = ƒ.Component.registerSubclass(OpponentScript);
+        // Properties may be mutated by users in the editor via the automatically created user interface
+        message = "CustomComponentScript added to ";
+        constructor() {
+            super();
+            // Don't start when running in editor
+            if (ƒ.Project.mode == ƒ.MODE.EDITOR)
+                return;
+            // Listen to this component being added to or removed from a node
+            this.addEventListener("componentAdd" /* COMPONENT_ADD */, this.hndEvent);
+            this.addEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
+            this.addEventListener("nodeDeserialized" /* NODE_DESERIALIZED */, this.hndEvent);
+        }
+        // Activate the functions of this component as response to events
+        hndEvent = (_event) => {
+            switch (_event.type) {
+                case "componentAdd" /* COMPONENT_ADD */:
+                    ƒ.Debug.log(this.message, this.node);
+                    break;
+                case "componentRemove" /* COMPONENT_REMOVE */:
+                    this.removeEventListener("componentAdd" /* COMPONENT_ADD */, this.hndEvent);
+                    this.removeEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
+                    break;
+                case "nodeDeserialized" /* NODE_DESERIALIZED */:
+                    this.node.addEventListener("Reset", this.startPostion);
+                    // if deserialized the node is now fully reconstructed and access to all its components and children is possible
+                    break;
+            }
+        };
+        startPostion(_event) {
+            // sets gegner back to idle
+            console.log("Reset");
+            Script.opponent.mtxLocal.translation = new ƒ.Vector3(-8, 22, 0);
+        }
+    }
+    Script.OpponentScript = OpponentScript;
 })(Script || (Script = {}));
 var Script;
 (function (Script) {
@@ -211,24 +263,101 @@ var Script;
             this.heart = _config.heart;
             this.controller = new ƒUi.Controller(this, document.querySelector("#vui"));
         }
-        updatehealth() {
-            let lifebar = document.querySelector("#img");
-            if (this.heart == 3) {
+        /*public updatehealth():void {
+            let lifebar: HTMLImageElement = document.querySelector("#img");
+            if(this.heart == 3){
                 // console.log("two");
                 lifebar.setAttribute('src', 'Resources/Herzen3.png');
             }
-            if (this.heart == 2) {
+            if(this.heart == 2){
                 lifebar.setAttribute('src', 'Resources/Herzen2.png');
                 // console.log("one");
             }
-            if (this.heart == 1) {
+            if(this.heart == 1){
                 lifebar.setAttribute('src', 'Resources/Herzen1.png');
                 // console.log("zero");
             }
-        }
+        }*/
         reduceMutator(_mutator) { }
         ;
     }
     Script.VisualUi = VisualUi;
+})(Script || (Script = {}));
+var Script;
+(function (Script) {
+    var ƒAid = FudgeAid;
+    ƒ.Project.registerScriptNamespace(Script);
+    let MODE;
+    (function (MODE) {
+        MODE[MODE["IDLE"] = 0] = "IDLE";
+        MODE[MODE["ATTACK"] = 1] = "ATTACK";
+    })(MODE || (MODE = {}));
+    class actions extends ƒAid.ComponentStateMachine {
+        static iSubclass = ƒ.Component.registerSubclass(actions);
+        static instructions = actions.get();
+        constructor() {
+            super();
+            this.instructions = actions.instructions; // setup instructions with the static set
+            // Don't start when running in editor
+            if (ƒ.Project.mode == ƒ.MODE.EDITOR)
+                return;
+            // Listen to this component being added to or removed from a node
+            this.addEventListener("componentAdd" /* COMPONENT_ADD */, this.hndEvent);
+            this.addEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
+            this.addEventListener("nodeDeserialized" /* NODE_DESERIALIZED */, this.hndEvent);
+        }
+        static get() {
+            let setup = new ƒAid.StateMachineInstructions();
+            setup.transitDefault = actions.transitDefault;
+            setup.actDefault = actions.actDefault;
+            setup.setAction(MODE.IDLE, this.actIdle);
+            setup.setAction(MODE.ATTACK, this.actAttack);
+            return setup;
+        }
+        static transitDefault(_machine) {
+            // console.log("Transit to", _machine.stateNext);
+        }
+        static async actDefault(_machine) {
+            // console.log(MODE[_machine.stateCurrent]);
+        }
+        static async actIdle(_machine) {
+            let ketpos = Script.ket.mtxLocal.translation;
+            let opponentpos = _machine.node.mtxLocal.translation;
+            _machine.node.getComponent(ƒ.ComponentAnimator).animation = ƒ.Project.getResourcesByName("GegnerIdle")[0];
+            if (parseInt(ketpos.y.toFixed(0)) == opponentpos.y && Math.sqrt(Math.pow(opponentpos.x - ketpos.x, 2)) <= 2) {
+                _machine.transit(MODE.ATTACK);
+            }
+        }
+        static async actAttack(_machine) {
+            let opponentpos = _machine.node.mtxLocal.translation;
+            _machine.node.getComponent(ƒ.ComponentAnimator).animation = ƒ.Project.getResourcesByName("GegnerAngriff")[0];
+            _machine.node.mtxLocal.translateX((3.0) * ƒ.Loop.timeFrameGame / 1000);
+            if (opponentpos.x > 30) {
+                Script.opponent.dispatchEvent(new Event("Reset", { bubbles: true }));
+                _machine.transit(MODE.IDLE);
+            }
+        }
+        // Activate the functions of this component as response to events
+        hndEvent = (_event) => {
+            switch (_event.type) {
+                case "componentAdd" /* COMPONENT_ADD */:
+                    ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, this.update);
+                    this.transit(MODE.IDLE);
+                    break;
+                case "componentRemove" /* COMPONENT_REMOVE */:
+                    this.removeEventListener("componentAdd" /* COMPONENT_ADD */, this.hndEvent);
+                    this.removeEventListener("componentRemove" /* COMPONENT_REMOVE */, this.hndEvent);
+                    ƒ.Loop.removeEventListener("loopFrame" /* LOOP_FRAME */, this.update);
+                    break;
+                case "nodeDeserialized" /* NODE_DESERIALIZED */:
+                    // this.transit(MODE.IDLE);
+                    break;
+            }
+        };
+        update = (_event) => {
+            this.act();
+        };
+    }
+    Script.actions = actions;
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map

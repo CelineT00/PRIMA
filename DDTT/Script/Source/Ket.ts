@@ -106,7 +106,7 @@ namespace Script {
           }
           else {
             viewport.getBranch().getChildrenByName("Collectibles")[0].removeChild(food);
-            points++;
+            vui.points++;
             addAudioSound("food.mp3");
             return food;
           }

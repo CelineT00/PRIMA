@@ -15,7 +15,7 @@ namespace Script{
             this.controller = new ƒUi.Controller(this,document.querySelector("#vui"));
         }
 
-        public updatehealth():void {
+        /*public updatehealth():void {
             let lifebar: HTMLImageElement = document.querySelector("#img");
             if(this.heart == 3){
                 // console.log("two");
@@ -29,7 +29,7 @@ namespace Script{
                 lifebar.setAttribute('src', 'Resources/Herzen1.png');
                 // console.log("zero");
             }
-        }
+        }*/
 
         
 

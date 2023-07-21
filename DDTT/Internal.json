@@ -1504,6 +1504,102 @@
       }
     }
   },
+  "Audio|2023-07-20T12:27:42.437Z|39410": {
+    "ƒ.Audio": {
+      "url": "food.mp3",
+      "idResource": "Audio|2023-07-20T12:27:42.437Z|39410",
+      "name": "food.mp3",
+      "type": "Audio"
+    }
+  },
+  "Material|2023-07-20T15:53:07.025Z|32767": {
+    "ƒ.Material": {
+      "name": "Gegner",
+      "idResource": "Material|2023-07-20T15:53:07.025Z|32767",
+      "shader": "ShaderLitTextured",
+      "coat": {
+        "ƒ.CoatTextured": {
+          "color": "[1, 1, 1, 1]",
+          "idTexture": "TextureImage|2023-07-20T15:53:00.017Z|20376"
+        }
+      }
+    }
+  },
+  "TextureImage|2023-07-20T15:53:00.017Z|20376": {
+    "ƒ.TextureImage": {
+      "url": "Gegner.png",
+      "type": "TextureImage",
+      "Texture": {
+        "idResource": "TextureImage|2023-07-20T15:53:00.017Z|20376",
+        "name": "Gegner.png",
+        "mipmap": "CRISP"
+      }
+    }
+  },
+  "AnimationSprite|2023-07-20T15:53:21.392Z|04335": {
+    "ƒ.AnimationSprite": {
+      "idResource": "AnimationSprite|2023-07-20T15:53:21.392Z|04335",
+      "idTexture": "TextureImage|2023-07-20T15:53:00.017Z|20376",
+      "frames": 8,
+      "wrapAfter": 8,
+      "start": "[2, -1]",
+      "size": "[16, 16]",
+      "next": "[22, 0]",
+      "wrap": "[0, 80]",
+      "Animation": {
+        "idResource": "AnimationSprite|2023-07-20T15:53:21.392Z|04335",
+        "name": "GegnerIdle",
+        "labels": {},
+        "events": {},
+        "framesPerSecond": 8,
+        "animationStructure": {}
+      }
+    }
+  },
+  "Material|2023-07-20T22:04:21.808Z|24824": {
+    "ƒ.Material": {
+      "name": "Gegner2",
+      "idResource": "Material|2023-07-20T22:04:21.808Z|24824",
+      "shader": "ShaderLitTextured",
+      "coat": {
+        "ƒ.CoatTextured": {
+          "color": "[1, 1, 1, 1]",
+          "idTexture": "TextureImage|2023-07-20T22:04:15.235Z|54714"
+        }
+      }
+    }
+  },
+  "TextureImage|2023-07-20T22:04:15.235Z|54714": {
+    "ƒ.TextureImage": {
+      "url": "Gegner2.png",
+      "type": "TextureImage",
+      "Texture": {
+        "idResource": "TextureImage|2023-07-20T22:04:15.235Z|54714",
+        "name": "Gegner2.png",
+        "mipmap": "CRISP"
+      }
+    }
+  },
+  "AnimationSprite|2023-07-20T22:04:36.789Z|11762": {
+    "ƒ.AnimationSprite": {
+      "idResource": "AnimationSprite|2023-07-20T22:04:36.789Z|11762",
+      "idTexture": "TextureImage|2023-07-20T22:04:15.235Z|54714",
+      "frames": 8,
+      "wrapAfter": 8,
+      "start": "[32, 32]",
+      "size": "[32, 32]",
+      "next": "[32, 0]",
+      "wrap": "[0, 80]",
+      "Animation": {
+        "idResource": "AnimationSprite|2023-07-20T22:04:36.789Z|11762",
+        "name": "Gegner2",
+        "labels": {},
+        "events": {},
+        "framesPerSecond": 8,
+        "animationStructure": {}
+      }
+    }
+  },
   "Graph|2023-07-18T12:07:44.918Z|35465": {
     "ƒ.Graph": {
       "name": "Game",
@@ -1549,6 +1645,25 @@
           {
             "ƒ.ComponentAudioListener": {
               "active": true
+            }
+          }
+        ],
+        "ComponentLight": [
+          {
+            "ƒ.ComponentLight": {
+              "pivot": {
+                "translation": "[0, 0, 0]",
+                "rotation": "[0, 0, 0]",
+                "scaling": "[1, 1, 1]"
+              },
+              "light": {
+                "ƒ.LightAmbient": {
+                  "color": "[1, 1, 1, 1]"
+                }
+              },
+              "Component": {
+                "active": true
+              }
             }
           }
         ]
@@ -1633,52 +1748,21 @@
                           "active": true
                         }
                       }
-                    ]
-                  },
-                  "children": []
-                }
-              },
-              {
-                "ƒ.Node": {
-                  "name": "Erik",
-                  "active": true,
-                  "components": {
-                    "ComponentTransform": [
-                      {
-                        "ƒ.ComponentTransform": {
-                          "local": {
-                            "translation": "[42, 29, 0]",
-                            "rotation": "[0, 0, 0]",
-                            "scaling": "[1, 1, 1]"
-                          },
-                          "Component": {
-                            "active": true
-                          }
-                        }
-                      }
                     ],
-                    "ComponentMaterial": [
+                    "ComponentRigidbody": [
                       {
-                        "ƒ.ComponentMaterial": {
-                          "sortForAlpha": false,
-                          "clrPrimary": "[1, 1, 1, 1]",
-                          "clrSecondary": "[1, 1, 1, 1]",
-                          "pivot": {
-                            "translation": "[0.10736196488142014, 0.01515151560306549]",
-                            "rotation": 0,
-                            "scaling": "[0.09815950691699982, 0.16161616146564484]"
-                          },
-                          "Component": {
-                            "active": true
-                          },
-                          "idMaterial": "Material|2023-07-20T08:04:29.347Z|81413"
-                        }
-                      }
-                    ],
-                    "ComponentMesh": [
-                      {
-                        "ƒ.ComponentMesh": {
-                          "idMesh": "MeshQuad|2023-07-18T12:11:09.292Z|85692",
+                        "ƒ.ComponentRigidbody": {
+                          "initialization": "TO_PIVOT",
+                          "friction": 0.2,
+                          "restitution": 0.2,
+                          "mass": 1,
+                          "dampTranslation": 0.1,
+                          "dampRotation": 0.1,
+                          "effectGravity": 1,
+                          "typeBody": "KINEMATIC",
+                          "typeCollider": "SPHERE",
+                          "isTrigger": false,
+                          "id": 2,
                           "pivot": {
                             "translation": "[0, 0, 0]",
                             "rotation": "[0, 0, 0]",
@@ -1687,92 +1771,6 @@
                           "Component": {
                             "active": true
                           }
-                        }
-                      }
-                    ],
-                    "ComponentAnimator": [
-                      {
-                        "ƒ.ComponentAnimator": {
-                          "Component": {
-                            "active": true
-                          },
-                          "idAnimation": "AnimationSprite|2023-07-20T08:05:17.767Z|75021",
-                          "playmode": "loop",
-                          "quantization": "discrete",
-                          "scale": 1,
-                          "scaleWithGameTime": true,
-                          "animateInEditor": false
-                        }
-                      }
-                    ]
-                  },
-                  "children": []
-                }
-              },
-              {
-                "ƒ.Node": {
-                  "name": "Ben",
-                  "active": true,
-                  "components": {
-                    "ComponentAnimator": [
-                      {
-                        "ƒ.ComponentAnimator": {
-                          "Component": {
-                            "active": true
-                          },
-                          "idAnimation": "AnimationSprite|2023-07-20T08:16:58.453Z|99773",
-                          "playmode": "loop",
-                          "quantization": "discrete",
-                          "scale": 1,
-                          "scaleWithGameTime": true,
-                          "animateInEditor": false
-                        }
-                      }
-                    ],
-                    "ComponentTransform": [
-                      {
-                        "ƒ.ComponentTransform": {
-                          "local": {
-                            "translation": "[-6, 34, 0]",
-                            "rotation": "[0, 0, 0]",
-                            "scaling": "[1, 1, 1]"
-                          },
-                          "Component": {
-                            "active": true
-                          }
-                        }
-                      }
-                    ],
-                    "ComponentMesh": [
-                      {
-                        "ƒ.ComponentMesh": {
-                          "idMesh": "MeshQuad|2023-07-18T12:11:09.292Z|85692",
-                          "pivot": {
-                            "translation": "[0, -0.30000001192092896, 0]",
-                            "rotation": "[0, 0, 0]",
-                            "scaling": "[0.49999991059303284, 0.49999991059303284, 1]"
-                          },
-                          "Component": {
-                            "active": true
-                          }
-                        }
-                      }
-                    ],
-                    "ComponentMaterial": [
-                      {
-                        "ƒ.ComponentMaterial": {
-                          "sortForAlpha": false,
-                          "clrPrimary": "[1, 1, 1, 1]",
-                          "clrSecondary": "[1, 1, 1, 1]",
-                          "pivot": {
-                            "translation": "[0, 0]",
-                            "rotation": 0,
-                            "scaling": "[1, 1]"
-                          },
-                          "Component": {
-                            "active": true
-                          },
-                          "idMaterial": "Material|2023-07-20T08:16:46.239Z|17350"
                         }
                       }
                     ]
@@ -53184,6 +53182,356 @@
               }
             ]
           }
+        },
+        {
+          "ƒ.Node": {
+            "name": "Gegner",
+            "active": true,
+            "components": {},
+            "children": [
+              {
+                "ƒ.Node": {
+                  "name": "Gegner1",
+                  "active": true,
+                  "components": {
+                    "ComponentTransform": [
+                      {
+                        "ƒ.ComponentTransform": {
+                          "local": {
+                            "translation": "[-8, 22, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentMaterial": [
+                      {
+                        "ƒ.ComponentMaterial": {
+                          "sortForAlpha": false,
+                          "clrPrimary": "[1, 1, 1, 1]",
+                          "clrSecondary": "[1, 1, 1, 1]",
+                          "pivot": {
+                            "translation": "[0.011363636702299118, -0.0357142873108387]",
+                            "rotation": 0,
+                            "scaling": "[0.09090909361839294, 0.5714285969734192]"
+                          },
+                          "Component": {
+                            "active": true
+                          },
+                          "idMaterial": "Material|2023-07-20T15:53:07.025Z|32767"
+                        }
+                      }
+                    ],
+                    "ComponentAnimator": [
+                      {
+                        "ƒ.ComponentAnimator": {
+                          "Component": {
+                            "active": true
+                          },
+                          "idAnimation": "AnimationSprite|2023-07-20T15:53:21.392Z|04335",
+                          "playmode": "loop",
+                          "quantization": "discrete",
+                          "scale": 1,
+                          "scaleWithGameTime": true,
+                          "animateInEditor": false
+                        }
+                      }
+                    ],
+                    "ComponentMesh": [
+                      {
+                        "ƒ.ComponentMesh": {
+                          "idMesh": "MeshQuad|2023-07-18T12:11:09.292Z|85692",
+                          "pivot": {
+                            "translation": "[0, 0, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "Script.actions": {
+                          "active": true
+                        }
+                      }
+                    ],
+                    "OpponentScript": [
+                      {
+                        "Script.OpponentScript": {
+                          "active": true,
+                          "message": "CustomComponentScript added to "
+                        }
+                      }
+                    ]
+                  },
+                  "children": []
+                }
+              },
+              {
+                "ƒ.Node": {
+                  "name": "Gegner2",
+                  "active": true,
+                  "components": {
+                    "ComponentTransform": [
+                      {
+                        "ƒ.ComponentTransform": {
+                          "local": {
+                            "translation": "[5, 0, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentMaterial": [
+                      {
+                        "ƒ.ComponentMaterial": {
+                          "sortForAlpha": false,
+                          "clrPrimary": "[1, 1, 1, 1]",
+                          "clrSecondary": "[1, 1, 1, 1]",
+                          "pivot": {
+                            "translation": "[0.3059404790401459, 0.25]",
+                            "rotation": 0,
+                            "scaling": "[0.1111111119389534, 0.25]"
+                          },
+                          "Component": {
+                            "active": true
+                          },
+                          "idMaterial": "Material|2023-07-20T22:04:21.808Z|24824"
+                        }
+                      }
+                    ],
+                    "ComponentAnimator": [
+                      {
+                        "ƒ.ComponentAnimator": {
+                          "Component": {
+                            "active": true
+                          },
+                          "idAnimation": "AnimationSprite|2023-07-20T22:04:36.789Z|11762",
+                          "playmode": "loop",
+                          "quantization": "discrete",
+                          "scale": 1,
+                          "scaleWithGameTime": true,
+                          "animateInEditor": false
+                        }
+                      }
+                    ],
+                    "ComponentMesh": [
+                      {
+                        "ƒ.ComponentMesh": {
+                          "idMesh": "MeshQuad|2023-07-18T12:11:09.292Z|85692",
+                          "pivot": {
+                            "translation": "[0, 0, 0]",
+                            "rotation": "[0, -3, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentRigidbody": [
+                      {
+                        "ƒ.ComponentRigidbody": {
+                          "initialization": "TO_PIVOT",
+                          "friction": 0.2,
+                          "restitution": 0.2,
+                          "mass": 1,
+                          "dampTranslation": 0.1,
+                          "dampRotation": 0.1,
+                          "effectGravity": 0,
+                          "typeBody": "DYNAMIC",
+                          "typeCollider": "SPHERE",
+                          "isTrigger": false,
+                          "id": 1,
+                          "pivot": {
+                            "translation": "[0, 0, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "OpponentMovementScript": [
+                      {
+                        "Script.OpponentMovementScript": {
+                          "active": true,
+                          "message": "CustomComponentScript added to "
+                        }
+                      }
+                    ]
+                  },
+                  "children": []
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ƒ.Node": {
+            "name": "Collectibles2",
+            "active": true,
+            "components": {},
+            "children": [
+              {
+                "ƒ.Node": {
+                  "name": "Erik",
+                  "active": true,
+                  "components": {
+                    "ComponentTransform": [
+                      {
+                        "ƒ.ComponentTransform": {
+                          "local": {
+                            "translation": "[42, 29, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentMaterial": [
+                      {
+                        "ƒ.ComponentMaterial": {
+                          "sortForAlpha": false,
+                          "clrPrimary": "[1, 1, 1, 1]",
+                          "clrSecondary": "[1, 1, 1, 1]",
+                          "pivot": {
+                            "translation": "[0.10736196488142014, 0.01515151560306549]",
+                            "rotation": 0,
+                            "scaling": "[0.09815950691699982, 0.16161616146564484]"
+                          },
+                          "Component": {
+                            "active": true
+                          },
+                          "idMaterial": "Material|2023-07-20T08:04:29.347Z|81413"
+                        }
+                      }
+                    ],
+                    "ComponentMesh": [
+                      {
+                        "ƒ.ComponentMesh": {
+                          "idMesh": "MeshQuad|2023-07-18T12:11:09.292Z|85692",
+                          "pivot": {
+                            "translation": "[0, 0, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentAnimator": [
+                      {
+                        "ƒ.ComponentAnimator": {
+                          "Component": {
+                            "active": false
+                          },
+                          "idAnimation": "AnimationSprite|2023-07-20T08:05:17.767Z|75021",
+                          "playmode": "loop",
+                          "quantization": "discrete",
+                          "scale": 1,
+                          "scaleWithGameTime": true,
+                          "animateInEditor": false
+                        }
+                      }
+                    ]
+                  },
+                  "children": []
+                }
+              },
+              {
+                "ƒ.Node": {
+                  "name": "Ben",
+                  "active": true,
+                  "components": {
+                    "ComponentAnimator": [
+                      {
+                        "ƒ.ComponentAnimator": {
+                          "Component": {
+                            "active": false
+                          },
+                          "idAnimation": "AnimationSprite|2023-07-20T08:16:58.453Z|99773",
+                          "playmode": "loop",
+                          "quantization": "discrete",
+                          "scale": 1,
+                          "scaleWithGameTime": true,
+                          "animateInEditor": false
+                        }
+                      }
+                    ],
+                    "ComponentTransform": [
+                      {
+                        "ƒ.ComponentTransform": {
+                          "local": {
+                            "translation": "[-6, 34, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[1, 1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentMesh": [
+                      {
+                        "ƒ.ComponentMesh": {
+                          "idMesh": "MeshQuad|2023-07-18T12:11:09.292Z|85692",
+                          "pivot": {
+                            "translation": "[0, -0.30000001192092896, 0]",
+                            "rotation": "[0, 0, 0]",
+                            "scaling": "[0.49999991059303284, 0.49999991059303284, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          }
+                        }
+                      }
+                    ],
+                    "ComponentMaterial": [
+                      {
+                        "ƒ.ComponentMaterial": {
+                          "sortForAlpha": false,
+                          "clrPrimary": "[1, 1, 1, 1]",
+                          "clrSecondary": "[1, 1, 1, 1]",
+                          "pivot": {
+                            "translation": "[0, 0]",
+                            "rotation": 0,
+                            "scaling": "[1, 1]"
+                          },
+                          "Component": {
+                            "active": true
+                          },
+                          "idMaterial": "Material|2023-07-20T08:16:46.239Z|17350"
+                        }
+                      }
+                    ]
+                  },
+                  "children": []
+                }
+              }
+            ]
+          }
         }
       ],
       "idResource": "Graph|2023-07-18T12:07:44.918Z|35465",
@@ -53334,12 +53682,24 @@
       }
     }
   },
-  "Audio|2023-07-20T12:27:42.437Z|39410": {
-    "ƒ.Audio": {
-      "url": "food.mp3",
-      "idResource": "Audio|2023-07-20T12:27:42.437Z|39410",
-      "name": "food.mp3",
-      "type": "Audio"
+  "AnimationSprite|2023-07-20T15:55:22.323Z|90226": {
+    "ƒ.AnimationSprite": {
+      "idResource": "AnimationSprite|2023-07-20T15:55:22.323Z|90226",
+      "idTexture": "TextureImage|2023-07-20T15:53:00.017Z|20376",
+      "frames": 8,
+      "wrapAfter": 8,
+      "start": "[2, 13]",
+      "size": "[18, 16]",
+      "next": "[22, 0]",
+      "wrap": "[0, 80]",
+      "Animation": {
+        "idResource": "AnimationSprite|2023-07-20T15:55:22.323Z|90226",
+        "name": "GegnerAngriff",
+        "labels": {},
+        "events": {},
+        "framesPerSecond": 25,
+        "animationStructure": {}
+      }
     }
   }
 }

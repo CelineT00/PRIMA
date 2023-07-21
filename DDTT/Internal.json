@@ -1731,7 +1731,7 @@
                           "clrPrimary": "[1, 1, 1, 1]",
                           "clrSecondary": "[1, 1, 1, 1]",
                           "pivot": {
-                            "translation": "[0.4531055688858032, 0.34825870394706726]",
+                            "translation": "[0.4455782175064087, 0.1890547275543213]",
                             "rotation": 0,
                             "scaling": "[0.10884353518486023, 0.15920397639274597]"
                           },
@@ -53285,7 +53285,7 @@
                         "ƒ.ComponentTransform": {
                           "local": {
                             "translation": "[5, 0, 0]",
-                            "rotation": "[0, 0, 0]",
+                            "rotation": "[0, 180, 0]",
                             "scaling": "[1, 1, 1]"
                           },
                           "Component": {
@@ -53301,7 +53301,7 @@
                           "clrPrimary": "[1, 1, 1, 1]",
                           "clrSecondary": "[1, 1, 1, 1]",
                           "pivot": {
-                            "translation": "[0.3059404790401459, 0.25]",
+                            "translation": "[0.7777777910232544, 0.25]",
                             "rotation": 0,
                             "scaling": "[0.1111111119389534, 0.25]"
                           },
@@ -53330,10 +53330,10 @@
                     "ComponentMesh": [
                       {
                         "ƒ.ComponentMesh": {
-                          "idMesh": "MeshQuad|2023-07-18T12:11:09.292Z|85692",
+                          "idMesh": "MeshSprite|2023-07-21T09:08:38.708Z|27469",
                           "pivot": {
                             "translation": "[0, 0, 0]",
-                            "rotation": "[0, -3, 0]",
+                            "rotation": "[0, 0, 0]",
                             "scaling": "[1, 1, 1]"
                           },
                           "Component": {
@@ -53700,6 +53700,13 @@
         "framesPerSecond": 25,
         "animationStructure": {}
       }
+    }
+  },
+  "MeshSprite|2023-07-21T09:08:38.708Z|27469": {
+    "ƒ.MeshSprite": {
+      "idResource": "MeshSprite|2023-07-21T09:08:38.708Z|27469",
+      "name": "MeshSprite",
+      "type": "MeshSprite"
     }
   }
 }
